@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="MySQL," />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="我本是sb,却装得酷酷滴!!!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="分类">
-<meta property="og:url" content="http://blog.orzcn.cn/categories/index.html">
+<meta name="description" content="数据库设计过程中提倡的一些规范。">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库设计规范">
+<meta property="og:url" content="http://blog.orzcn.cn/2018/02/05/dbDesignSpecification/index.html">
 <meta property="og:site_name" content="NoFacePeace">
-<meta property="og:description" content="我本是sb,却装得酷酷滴!!!">
+<meta property="og:description" content="数据库设计过程中提倡的一些规范。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-28T19:37:14.608Z">
+<meta property="og:updated_time" content="2018-02-04T18:47:15.573Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="分类">
-<meta name="twitter:description" content="我本是sb,却装得酷酷滴!!!">
+<meta name="twitter:title" content="数据库设计规范">
+<meta name="twitter:description" content="数据库设计过程中提倡的一些规范。">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.orzcn.cn/categories/"/>
+  <link rel="canonical" href="http://blog.orzcn.cn/2018/02/05/dbDesignSpecification/"/>
 
 
 
 
 
-  <title>分类 | NoFacePeace</title>
+  <title>数据库设计规范 | NoFacePeace</title>
   
 
 
@@ -250,40 +251,227 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.orzcn.cn/2018/02/05/dbDesignSpecification/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chenhaotao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NoFacePeace">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">分类</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
-                目前共计 4 个分类
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/代码/">代码</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/教程/">教程</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/规范/">规范</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">2</span></li></ul>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">数据库设计规范</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-05T02:38:12+08:00">
+                2018-02-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/规范/" itemprop="url" rel="index">
+                    <span itemprop="name">规范</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>数据库设计过程中提倡的一些规范。</p>
+<a id="more"></a>
+<h1 id="一般规则"><a href="#一般规则" class="headerlink" title="一般规则"></a>一般规则</h1><ol>
+<li>unsigned，not null, 禁止字段定义出现允许 null 的情况</li>
+<li>不要用非负整形，非负由程序控制 比如把-1存到非负字段里，会变成很大的数，在判断用户积分大小的时候，大数比负值危害更大</li>
+<li>字段都必须有默认值，必须有注释，注释可以方便后续开发人员理解</li>
+<li>字段，表名均小写，避免中文拼音，单词间使用下划线相连</li>
+<li>字段，表名用单数，这样简单，便利，举个例子，你有一个袋子，里面有好多个苹果，你会说这是个苹果袋。但无论里面有0，1，百万个苹果，它依然是个袋子。表也是如此，表名需要描述清楚，表里面包含的对象，而非有多少个数据</li>
+<li>表命名有前缀，默认 utf-8 编码，涉及到emoji表情的表，需要设置为 utf8mb4（字段名正常情况下没有前缀）</li>
+<li>数据库使用 InnoDB 引擎, 不要使用 MyISAM 引擎，InnoDB 支持事务，支持行锁定</li>
+<li>每个表尽量有个自增id作为主键，方便增删改查</li>
+<li>每个表都尽量有创建时间和更新时间</li>
+<li>status 状态标记： -2删除 -1审核不通过 0初始状态 1审核通过， 删除操作均为标记删除,即update table set status = -1，很少用到delete, 尽可能的保留数据</li>
+</ol>
+<h1 id="字段存储类型的选用"><a href="#字段存储类型的选用" class="headerlink" title="字段存储类型的选用"></a>字段存储类型的选用</h1><ol>
+<li>整数类型，特别小的用 tinyint, 一般用 int，特别大的用 bigint, 默认为0</li>
+<li>小数类型，对于钱等需要确保精度的，用 decimal，对于位数比较短一般精度的，用 float，例如打分,9.6, 7.3</li>
+<li>字符串类型，用 varchar, 默认为空字符串</li>
+<li>文本类型，用 text，比如文章内容</li>
+<li>时间类型，用 datetime, 默认为1000-01-01 00:00:00</li>
+<li>日期类型，用 date, 比如1992-01-12, 默认为1000-01-01</li>
+<li>使用 int(10) 存时间戳</li>
+<li>使用 char(15) 存储 IP，当前 IPV6 还很不普及，暂不考虑</li>
+<li>关于选项(类似两个选项或者三个)，使用数字代替，比如 1 代表啥，2代表啥，因为不是所有的数据库都支持 enum</li>
+</ol>
+<h1 id="常用字段的定义"><a href="#常用字段的定义" class="headerlink" title="常用字段的定义"></a>常用字段的定义</h1><table>
+<thead>
+<tr>
+<th style="text-align:center">字段命名</th>
+<th style="text-align:center">字段类型</th>
+<th style="text-align:center">字段描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">created_at</td>
+<td style="text-align:center">datetime</td>
+<td style="text-align:center">创建时间</td>
+</tr>
+<tr>
+<td style="text-align:center">updated_at</td>
+<td style="text-align:center">datetime</td>
+<td style="text-align:center">更新时间</td>
+</tr>
+<tr>
+<td style="text-align:center">founder_id</td>
+<td style="text-align:center">int</td>
+<td style="text-align:center">创建人id</td>
+</tr>
+<tr>
+<td style="text-align:center">updater_id</td>
+<td style="text-align:center">int</td>
+<td style="text-align:center">更新人员id</td>
+</tr>
+<tr>
+<td style="text-align:center">current_time</td>
+<td style="text-align:center">int(10）</td>
+<td style="text-align:center">当前时间</td>
+</tr>
+</tbody>
+</table>
+<h1 id="数据表结构更新路程"><a href="#数据表结构更新路程" class="headerlink" title="数据表结构更新路程"></a>数据表结构更新路程</h1><p>本地(可选)(local) -&gt; 开发环境(dev) -&gt; 测试环境(test) -&gt; 生产环境(production)</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/04/First-Code-Review/" rel="next" title="First Code Review">
+                <i class="fa fa-chevron-left"></i> First Code Review
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -316,8 +504,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -381,6 +578,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一般规则"><span class="nav-number">1.</span> <span class="nav-text">一般规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字段存储类型的选用"><span class="nav-number">2.</span> <span class="nav-text">字段存储类型的选用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用字段的定义"><span class="nav-number">3.</span> <span class="nav-text">常用字段的定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据表结构更新路程"><span class="nav-number">4.</span> <span class="nav-text">数据表结构更新路程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
