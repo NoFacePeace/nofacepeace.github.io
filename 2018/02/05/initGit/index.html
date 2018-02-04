@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Github,Git," />
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="我本是sb,却装得酷酷滴!!!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="NoFacePeace">
-<meta property="og:url" content="http://blog.orzcn.cn/tags/PhpStorm/index.html">
+<meta name="description" content="初始化 Git 的一般步骤。">
+<meta name="keywords" content="Github,Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初始化 Git">
+<meta property="og:url" content="http://blog.orzcn.cn/2018/02/05/initGit/index.html">
 <meta property="og:site_name" content="NoFacePeace">
-<meta property="og:description" content="我本是sb,却装得酷酷滴!!!">
+<meta property="og:description" content="初始化 Git 的一般步骤。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-02-04T18:56:01.955Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NoFacePeace">
-<meta name="twitter:description" content="我本是sb,却装得酷酷滴!!!">
+<meta name="twitter:title" content="初始化 Git">
+<meta name="twitter:description" content="初始化 Git 的一般步骤。">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.orzcn.cn/tags/PhpStorm/"/>
+  <link rel="canonical" href="http://blog.orzcn.cn/2018/02/05/initGit/"/>
 
 
 
 
 
-  <title>标签: PhpStorm | NoFacePeace</title>
+  <title>初始化 Git | NoFacePeace</title>
   
 
 
@@ -143,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -247,54 +249,186 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>PhpStorm<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.orzcn.cn/2018/02/05/initGit/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chenhaotao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NoFacePeace">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/02/04/First-Code-Review/" itemprop="url">
-              
-                <span itemprop="name">First Code Review</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">初始化 Git</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-04T18:48:14+08:00"
-              content="2018-02-04" >
-          02-04
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-05T02:50:37+08:00">
+                2018-02-05
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/教程/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>初始化 Git 的一般步骤。</p>
+<a id="more"></a>
+<h1 id="配置信息"><a href="#配置信息" class="headerlink" title="配置信息"></a>配置信息</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"Firstname lastname"</span></span><br><span class="line">git config --global user.email <span class="string">"your_email@example.com"</span></span><br><span class="line">git config --global color.ui auto</span><br></pre></td></tr></table></figure>
+<p>配置信息保存在 “~/.gitconfig” 文件里</p>
+<h1 id="设置-SSH-Key"><a href="#设置-SSH-Key" class="headerlink" title="设置 SSH Key"></a>设置 SSH Key</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"your_email@example.com</span></span><br><span class="line"><span class="string">Generation public/private rsa key pair.</span></span><br><span class="line"><span class="string">Enter file in which to save the key</span></span><br><span class="line"><span class="string">(/Users/your_user_directory/.ssh/id_rsa):  #按回车键</span></span><br><span class="line"><span class="string">Enter passphrase (empty for no passphrase):  #输入密码</span></span><br><span class="line"><span class="string">Enter same passphrase again:  #再次输入密码</span></span><br></pre></td></tr></table></figure>
+<p>id_rsa 文件是私有密钥，id_rsa.pub 是公开密钥</p>
+<h1 id="添加公开密钥"><a href="#添加公开密钥" class="headerlink" title="添加公开密钥"></a>添加公开密钥</h1><ol>
+<li>点击账户设定按钮（Settings）</li>
+<li>选择  SSH  and   GPG  keys</li>
+<li>点击 New SSH key</li>
+<li>Title 输入密钥名称</li>
+<li>Key 粘贴 id_rsa.pub 内容</li>
+<li>收到提示“公共密钥添加完成“的邮件</li>
+<li>认证和通信 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br><span class="line"><span class="comment"># 出现如下结果即为成功</span></span><br><span class="line">Hi hirocastest!You<span class="string">'ve successfully authenticated,but GitHub does no provide shell access.</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Github/" rel="tag"># Github</a>
+          
+            <a href="/tags/Git/" rel="tag"># Git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/05/dbDesignSpecification/" rel="next" title="数据库设计规范">
+                <i class="fa fa-chevron-left"></i> 数据库设计规范
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -302,6 +436,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -322,8 +460,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -387,6 +534,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#配置信息"><span class="nav-number">1.</span> <span class="nav-text">配置信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置-SSH-Key"><span class="nav-number">2.</span> <span class="nav-text">设置 SSH Key</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加公开密钥"><span class="nav-number">3.</span> <span class="nav-text">添加公开密钥</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -527,6 +690,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
