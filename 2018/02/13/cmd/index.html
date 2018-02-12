@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Windows,CMD," />
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="我本是sb,却装得酷酷滴!!!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="NoFacePeace">
-<meta property="og:url" content="http://blog.orzcn.cn/tags/Git/index.html">
+<meta name="description" content="Windows 系统 常用的 CMD 命令">
+<meta name="keywords" content="Windows,CMD">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CMD 常用命令">
+<meta property="og:url" content="http://blog.orzcn.cn/2018/02/13/cmd/index.html">
 <meta property="og:site_name" content="NoFacePeace">
-<meta property="og:description" content="我本是sb,却装得酷酷滴!!!">
+<meta property="og:description" content="Windows 系统 常用的 CMD 命令">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-02-12T23:35:25.257Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NoFacePeace">
-<meta name="twitter:description" content="我本是sb,却装得酷酷滴!!!">
+<meta name="twitter:title" content="CMD 常用命令">
+<meta name="twitter:description" content="Windows 系统 常用的 CMD 命令">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.orzcn.cn/tags/Git/"/>
+  <link rel="canonical" href="http://blog.orzcn.cn/2018/02/13/cmd/"/>
 
 
 
 
 
-  <title>标签: Git | NoFacePeace</title>
+  <title>CMD 常用命令 | NoFacePeace</title>
   
 
 
@@ -143,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -247,54 +249,184 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Git<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.orzcn.cn/2018/02/13/cmd/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chenhaotao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NoFacePeace">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/02/05/initGit/" itemprop="url">
-              
-                <span itemprop="name">初始化 Git</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">CMD 常用命令</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-05T02:50:37+08:00"
-              content="2018-02-05" >
-          02-05
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-13T07:21:36+08:00">
+                2018-02-13
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/教程/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Windows 系统 常用的 CMD 命令</p>
+<a id="more"></a>
+<h1 id="CMD-命令"><a href="#CMD-命令" class="headerlink" title="CMD 命令"></a>CMD 命令</h1><ul>
+<li><p>删除目录：rmdir</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rmdir /s/q &lt;directory&gt;</span><br><span class="line"><span class="comment"># /s 表示删除所有子目录和文件</span></span><br><span class="line"><span class="comment"># /q 表示在删除文件或目录时，不要问我 yes or no 的动作</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建目录：mkdir</p>
+</li>
+<li>列出文件和目录：dir</li>
+<li>改变目录：cd</li>
+<li>删除文件：del</li>
+<li>查看文档树结构：tree</li>
+<li>新建文件：  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span> NUL&gt;&lt;file&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Windows/" rel="tag"># Windows</a>
+          
+            <a href="/tags/CMD/" rel="tag"># CMD</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/07/daily/" rel="next" title="日常生活作息">
+                <i class="fa fa-chevron-left"></i> 日常生活作息
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -302,6 +434,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -322,8 +458,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -387,6 +532,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CMD-命令"><span class="nav-number">1.</span> <span class="nav-text">CMD 命令</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -527,6 +688,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
