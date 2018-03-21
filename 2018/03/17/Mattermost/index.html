@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="NoFacePeace">
 <meta property="og:description" content="在 Ubuntu 16.04 LTS 环境下搭建 Mattermost 服务">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-21T05:20:50.582Z">
+<meta property="og:updated_time" content="2018-03-21T05:30:34.518Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu 16.04 LTS 安装 Mattermost">
 <meta name="twitter:description" content="在 Ubuntu 16.04 LTS 环境下搭建 Mattermost 服务">
@@ -379,58 +379,49 @@
         <p>在 Ubuntu 16.04 LTS 环境下搭建 Mattermost 服务</p>
 <a id="more"></a>
 <h1 id="安装-Mattermost"><a href="#安装-Mattermost" class="headerlink" title="安装 Mattermost"></a>安装 Mattermost</h1><ol>
-<li>下载 Mattermost</li>
+<li><p>下载 Mattermost</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://releases.mattermost.com/X.X.X/mattermost-X.X.X-linux-amd64.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解压文件</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvzf mattermost*.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>移动项目到有权限的目录</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv mattermost /home/&lt;user_name&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建存储目录文件</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /home/&lt;user_name&gt;/mattermost/data</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置数据库</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># ~/mattermost/config/config.json</span><br><span class="line">&quot;DriverName&quot; &quot;mysql&quot;,</span><br><span class="line">&quot;DataSource&quot;: &quot;&lt;user_name&gt;:&lt;user_password&gt;@tcp(&lt;host-name-or-IP&gt;:3306)/mattermost?charset=utf8mb4,utf8&amp;readTimeout=30s&amp;writeTimeout=30s&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建数据库</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create database mattermost;</span><br><span class="line">exit;</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://releases.mattermost.com/X.X.X/mattermost-X.X.X-linux-amd64.tar.gz</span><br></pre></td></tr></table></figure>
-<ol>
-<li>解压文件</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvzf mattermost*.gz</span><br></pre></td></tr></table></figure>
-<ol>
-<li>移动项目到有权限的目录</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv mattermost /home/&lt;user_name&gt;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>创建存储目录文件</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /home/&lt;user_name&gt;/mattermost/data</span><br></pre></td></tr></table></figure>
-<ol>
-<li>配置数据库</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># ~/mattermost/config/config.json</span><br><span class="line">&quot;DriverName&quot; &quot;mysql&quot;,</span><br><span class="line">&quot;DataSource&quot;: &quot;&lt;user_name&gt;:&lt;user_password&gt;@tcp(&lt;host-name-or-IP&gt;:3306)/mattermost?charset=utf8mb4,utf8&amp;readTimeout=30s&amp;writeTimeout=30s&quot;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>创建数据库</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create database mattermost;</span><br><span class="line">exit;</span><br></pre></td></tr></table></figure>
 <h1 id="配置成守护进程"><a href="#配置成守护进程" class="headerlink" title="配置成守护进程"></a>配置成守护进程</h1><ol>
-<li>创建 Systemd 配置文件</li>
+<li><p>创建 Systemd 配置文件</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo touch /lib/systemd/system/mattermost.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编辑配置文件</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Mattermost</span><br><span class="line">After=network.target</span><br><span class="line">After=mysql.service</span><br><span class="line">Requires=mysql.service</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=~/mattermost/bin/platform</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=10</span><br><span class="line">WorkingDirectory=~/mattermost</span><br><span class="line">User=&lt;user_name&gt;</span><br><span class="line">Group=&lt;user_group&gt;</span><br><span class="line">LimitNOFILE=49152</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=mysql.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Systemd 加载新的单元</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检测单元是否加载</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl status mattermost.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动服务</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start mattermost.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置开机启动</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> mattermost.service</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo touch /lib/systemd/system/mattermost.service</span><br></pre></td></tr></table></figure>
-<ol>
-<li>编辑配置文件</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Mattermost</span><br><span class="line">After=network.target</span><br><span class="line">After=mysql.service</span><br><span class="line">Requires=mysql.service</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=~/mattermost/bin/platform</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=10</span><br><span class="line">WorkingDirectory=~/mattermost</span><br><span class="line">User=&lt;user_name&gt;</span><br><span class="line">Group=&lt;user_group&gt;</span><br><span class="line">LimitNOFILE=49152</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=mysql.service</span><br></pre></td></tr></table></figure>
-<ol>
-<li>Systemd 加载新的单元</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br></pre></td></tr></table></figure>
-<ol>
-<li>检测单元是否加载</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl status mattermost.service</span><br></pre></td></tr></table></figure>
-<ol>
-<li>启动服务</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start mattermost.service</span><br></pre></td></tr></table></figure>
-<ol>
-<li>设置开机启动</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> mattermost.service</span><br></pre></td></tr></table></figure>
 <h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ol>
-<li>设置语言</li>
-</ol>
-<p>登录 - 主菜单 - 账号设置 - 显示 - 语言 - 简体中文</p>
-<ol>
+<li><p>设置语言</p>
+<p> 登录 - 主菜单 - 账号设置 - 显示 - 语言 - 简体中文</p>
+</li>
 <li><p>设置站点 URL</p>
 <ul>
 <li>在系统控制台的常规项中，点击配置</li>
