@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Ubuntu,Mattermost," />
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="我本是sb,却装得酷酷滴!!!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="NoFacePeace">
-<meta property="og:url" content="http://blog.orzcn.cn/tags/hosts/index.html">
+<meta name="description" content="在 Ubuntu 16.04 LTS 环境下搭建 Mattermost 服务">
+<meta name="keywords" content="Ubuntu,Mattermost">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu 16.04 LTS 安装 Mattermost">
+<meta property="og:url" content="http://blog.orzcn.cn/2018/03/17/Mattermost/index.html">
 <meta property="og:site_name" content="NoFacePeace">
-<meta property="og:description" content="我本是sb,却装得酷酷滴!!!">
+<meta property="og:description" content="在 Ubuntu 16.04 LTS 环境下搭建 Mattermost 服务">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-21T05:20:50.582Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NoFacePeace">
-<meta name="twitter:description" content="我本是sb,却装得酷酷滴!!!">
+<meta name="twitter:title" content="Ubuntu 16.04 LTS 安装 Mattermost">
+<meta name="twitter:description" content="在 Ubuntu 16.04 LTS 环境下搭建 Mattermost 服务">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.orzcn.cn/tags/hosts/"/>
+  <link rel="canonical" href="http://blog.orzcn.cn/2018/03/17/Mattermost/"/>
 
 
 
 
 
-  <title>标签: hosts | NoFacePeace</title>
+  <title>Ubuntu 16.04 LTS 安装 Mattermost | NoFacePeace</title>
   
 
 
@@ -143,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -271,54 +273,238 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>hosts<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.orzcn.cn/2018/03/17/Mattermost/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chenhaotao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NoFacePeace">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/03/02/ubuntu-hosts/" itemprop="url">
-              
-                <span itemprop="name">修改 Ubuntu 下的 hosts 文件</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Ubuntu 16.04 LTS 安装 Mattermost</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-02T23:00:35+08:00"
-              content="2018-03-02" >
-          03-02
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-17T16:05:05+08:00">
+                2018-03-17
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/教程/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在 Ubuntu 16.04 LTS 环境下搭建 Mattermost 服务</p>
+<a id="more"></a>
+<h1 id="安装-Mattermost"><a href="#安装-Mattermost" class="headerlink" title="安装 Mattermost"></a>安装 Mattermost</h1><ol>
+<li>下载 Mattermost</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://releases.mattermost.com/X.X.X/mattermost-X.X.X-linux-amd64.tar.gz</span><br></pre></td></tr></table></figure>
+<ol>
+<li>解压文件</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvzf mattermost*.gz</span><br></pre></td></tr></table></figure>
+<ol>
+<li>移动项目到有权限的目录</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv mattermost /home/&lt;user_name&gt;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>创建存储目录文件</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /home/&lt;user_name&gt;/mattermost/data</span><br></pre></td></tr></table></figure>
+<ol>
+<li>配置数据库</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># ~/mattermost/config/config.json</span><br><span class="line">&quot;DriverName&quot; &quot;mysql&quot;,</span><br><span class="line">&quot;DataSource&quot;: &quot;&lt;user_name&gt;:&lt;user_password&gt;@tcp(&lt;host-name-or-IP&gt;:3306)/mattermost?charset=utf8mb4,utf8&amp;readTimeout=30s&amp;writeTimeout=30s&quot;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>创建数据库</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create database mattermost;</span><br><span class="line">exit;</span><br></pre></td></tr></table></figure>
+<h1 id="配置成守护进程"><a href="#配置成守护进程" class="headerlink" title="配置成守护进程"></a>配置成守护进程</h1><ol>
+<li>创建 Systemd 配置文件</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo touch /lib/systemd/system/mattermost.service</span><br></pre></td></tr></table></figure>
+<ol>
+<li>编辑配置文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Mattermost</span><br><span class="line">After=network.target</span><br><span class="line">After=mysql.service</span><br><span class="line">Requires=mysql.service</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=~/mattermost/bin/platform</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=10</span><br><span class="line">WorkingDirectory=~/mattermost</span><br><span class="line">User=&lt;user_name&gt;</span><br><span class="line">Group=&lt;user_group&gt;</span><br><span class="line">LimitNOFILE=49152</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=mysql.service</span><br></pre></td></tr></table></figure>
+<ol>
+<li>Systemd 加载新的单元</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br></pre></td></tr></table></figure>
+<ol>
+<li>检测单元是否加载</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl status mattermost.service</span><br></pre></td></tr></table></figure>
+<ol>
+<li>启动服务</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start mattermost.service</span><br></pre></td></tr></table></figure>
+<ol>
+<li>设置开机启动</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> mattermost.service</span><br></pre></td></tr></table></figure>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ol>
+<li>设置语言</li>
+</ol>
+<p>登录 - 主菜单 - 账号设置 - 显示 - 语言 - 简体中文</p>
+<ol>
+<li><p>设置站点 URL</p>
+<ul>
+<li>在系统控制台的常规项中，点击配置</li>
+<li>在站点 URL 字段填写 URL</li>
+</ul>
+</li>
+</ol>
+<h1 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h1><ul>
+<li><a href="http://www.ruanyifeng.com/blog/2016/02/linux-daemon.html" target="_blank" rel="noopener">daemon</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html" target="_blank" rel="noopener">Systemd</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-part-two.html" target="_blank" rel="noopener">Systemd</a></li>
+<li><a href="https://docs.mattermost.com/install/install-ubuntu-1604.html#" target="_blank" rel="noopener">Document</a></li>
+</ul>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+          
+            <a href="/tags/Mattermost/" rel="tag"># Mattermost</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/06/binarySearch/" rel="next" title="二分查找">
+                <i class="fa fa-chevron-left"></i> 二分查找
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -326,6 +512,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -346,8 +536,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -411,6 +610,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装-Mattermost"><span class="nav-number">1.</span> <span class="nav-text">安装 Mattermost</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置成守护进程"><span class="nav-number">2.</span> <span class="nav-text">配置成守护进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置"><span class="nav-number">3.</span> <span class="nav-text">设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展阅读"><span class="nav-number">4.</span> <span class="nav-text">扩展阅读</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -551,6 +766,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

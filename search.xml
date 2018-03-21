@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Ubuntu 16.04 LTS 安装 Mattermost]]></title>
+    <url>%2F2018%2F03%2F17%2FMattermost%2F</url>
+    <content type="text"><![CDATA[在 Ubuntu 16.04 LTS 环境下搭建 Mattermost 服务 安装 Mattermost 下载 Mattermost 1wget https://releases.mattermost.com/X.X.X/mattermost-X.X.X-linux-amd64.tar.gz 解压文件 1tar -xvzf mattermost*.gz 移动项目到有权限的目录 1sudo mv mattermost /home/&lt;user_name&gt; 创建存储目录文件 1sudo mkdir /home/&lt;user_name&gt;/mattermost/data 配置数据库 123# ~/mattermost/config/config.json&quot;DriverName&quot; &quot;mysql&quot;,&quot;DataSource&quot;: &quot;&lt;user_name&gt;:&lt;user_password&gt;@tcp(&lt;host-name-or-IP&gt;:3306)/mattermost?charset=utf8mb4,utf8&amp;readTimeout=30s&amp;writeTimeout=30s&quot; 创建数据库 12create database mattermost;exit; 配置成守护进程 创建 Systemd 配置文件 1sudo touch /lib/systemd/system/mattermost.service 编辑配置文件 123456789101112131415161718[Unit]Description=MattermostAfter=network.targetAfter=mysql.serviceRequires=mysql.service[Service]Type=simpleExecStart=~/mattermost/bin/platformRestart=alwaysRestartSec=10WorkingDirectory=~/mattermostUser=&lt;user_name&gt;Group=&lt;user_group&gt;LimitNOFILE=49152[Install]WantedBy=mysql.service Systemd 加载新的单元 1sudo systemctl daemon-reload 检测单元是否加载 1sudo systemctl status mattermost.service 启动服务 1sudo systemctl start mattermost.service 设置开机启动 1sudo systemctl enable mattermost.service 设置 设置语言 登录 - 主菜单 - 账号设置 - 显示 - 语言 - 简体中文 设置站点 URL 在系统控制台的常规项中，点击配置 在站点 URL 字段填写 URL 扩展阅读 daemon Systemd Systemd Document]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu</tag>
+        <tag>Mattermost</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[二分查找]]></title>
     <url>%2F2018%2F03%2F06%2FbinarySearch%2F</url>
     <content type="text"><![CDATA[二次查找最基本的 Java实现 12345678910111213141516171819202122232425262728package cn.orzcn.www;public class Search &#123; public static void main(String[] args) &#123; int[] array = &#123;1,2,3,4,5,6&#125;; int position = binarySearch(array, 7); System.out.println(position); &#125; public static int binarySearch(int[] array, int key) &#123; if (array == null || array.length == 0) &#123; return -1; &#125; int left = 0; int right = array.length - 1; while (left &lt;= right) &#123; int mid = (left + right) / 2; if (array[mid] == key) return mid; if (array[mid] &lt; key) &#123; left = mid + 1; &#125; else &#123; right = mid - 1; &#125; &#125; return -1; &#125;&#125;]]></content>
