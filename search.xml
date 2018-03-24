@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[在 Vscode 中使用 Python 的 Virtualenv]]></title>
+    <url>%2F2018%2F03%2F24%2Fvscode-python-virtualenv%2F</url>
+    <content type="text"><![CDATA[更新 Python 扩展 打开命令面板 Ctrl + Shift + P，输入 Python: Select Interpreter，回车 选择 Virtualenv 的 Python 解释器]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Virtualenv</tag>
+        <tag>Vscode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[利用 Virtualenv 创建 Python 运行环境]]></title>
     <url>%2F2018%2F03%2F21%2Fvirtualenv%2F</url>
     <content type="text"><![CDATA[利用 Virtualenv 为一个应用创建一套隔离的 Python 运行环境 安装 1pip3 install virtualenv 创建应用目录 12sudo mkdir applicationcd application 创建运行环境 123virtualenv venv# 指定 Python 版本virtualenv --python=/usr/bin/python2.6 venv 进入运行环境 1source venv/bin/activate 退出运行环境 1deactivate 扩展阅读 文档 教程]]></content>
@@ -252,8 +265,8 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>Github</tag>
         <tag>Git</tag>
+        <tag>Github</tag>
       </tags>
   </entry>
   <entry>
@@ -327,8 +340,8 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
         <tag>Github</tag>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
