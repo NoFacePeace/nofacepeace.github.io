@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Ubuntu 16.04 创建无线热点]]></title>
+    <url>%2F2018%2F03%2F27%2Fubuntu-wifi%2F</url>
+    <content type="text"><![CDATA[点击右上角网络图标 点击编辑连接 选择 Wi-Fi，点击新建 点击 增加 选中 Wi-Fi，编辑信息 123SSID: &lt;WiFi_name&gt;模式: 热点# 其他选项默认 选中 Wi-Fi 安全性，编辑信息 12安全：WPA及WPA2个人密码：&lt;password&gt; 选中IPv4设置，编辑信息 1方法：与其他计算机共享 计算机连接有线网 点击右上角网络图标，点击连接到隐藏网络选项，选择创建的连接 点击右上角网络图标，点击连接信息，显示创建的连接，表示连接成功]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu</tag>
+        <tag>WiFi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Mattermost 自定义斜杠命令]]></title>
+    <url>%2F2018%2F03%2F25%2Fmattermost-custom-slash-command%2F</url>
+    <content type="text"><![CDATA[在 Mattermost 中集成自定义斜杠命令 问题 输入命令报错 带触发&lt;command&gt;的命令失败 查看日志，显示错误信息 address forbidden 在配置文件添加 URL，使其允许访问 12# ~/mattermost/config/config.json"AllowedUntrustedInternalConnections": "127.0.0.1",]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Mattermost</tag>
+        <tag>slash</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[在 Vscode 中使用 Python 的 Virtualenv]]></title>
     <url>%2F2018%2F03%2F24%2Fvscode-python-virtualenv%2F</url>
     <content type="text"><![CDATA[更新 Python 扩展 打开命令面板 Ctrl + Shift + P，输入 Python: Select Interpreter，回车 选择 Virtualenv 的 Python 解释器]]></content>
@@ -265,8 +289,8 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>Git</tag>
         <tag>Github</tag>
+        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
@@ -340,8 +364,8 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>Github</tag>
         <tag>Hexo</tag>
+        <tag>Github</tag>
       </tags>
   </entry>
   <entry>
