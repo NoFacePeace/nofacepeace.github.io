@@ -524,89 +524,16 @@
 
       
         
-          
-            <a id="more"></a>
-<h1 id="基本规范"><a href="#基本规范" class="headerlink" title="基本规范"></a>基本规范</h1><ul>
-<li>必须使用 InnoDB 存储引擎<br>  支持事务、行级锁、并发性能更好、CPU 及内存缓存页优化使得资源利用率更高</li>
-<li>必须使用 UTF-8 字符集<br>  万国码，无需转码，无乱码风险，节省空间</li>
-<li>数据表、数据字段必须加入中文注释<br>  明示该字段是干什么的</li>
-<li>禁止使用存储过程、视图、触发器、Event<br>  高并发大数据的互联网业务，架构设计思路是”解放数据库 CPU，将计算过转移到服务层“，并发量大的情况下，这些功能很可能将数据库拖死，业务逻辑放到服务层具备更好的扩展性，能够轻易实现”增加机器就加性能“。数据库擅长存储与索引，CPU计算还是上移把</li>
-<li>禁止存储大文件或者大照片<br>  数据库不擅长存储文件，大文件和照片存储在文件系统，数据库里存 URI 就行</li>
-</ul>
-<h1 id="命令规范"><a href="#命令规范" class="headerlink" title="命令规范"></a>命令规范</h1><ul>
-<li>只允许使用内网域名，而不是 IP 连接数据库</li>
-<li>线上环境、开发环境、测试环境数据库内网域名遵循命名规范<br>  业务名称：xxx<br>  线上环境：my4396.mysql.orzcn.cn<br>  开发环境：yf4396.mysql.orzcn.cn<br>  测试环境：test4396.mysql.orzcn.cn<br>  从库在名称后加-s标识，备库在名称后加-ss标识<br>  线上从库：my4396sa.mysql.orzcn.cn</li>
-<li>库名、表名、字段名：小写，下划线风格，不超过32个字符，必须见名知意，禁止拼音英文混用</li>
-<li>表名 t_xxx，非唯一索引名 idx_xxx，唯一索引名 uniq_xxx</li>
-</ul>
-<h1 id="表设计规范"><a href="#表设计规范" class="headerlink" title="表设计规范"></a>表设计规范</h1><ul>
-<li>单实例表数目必须小于 500</li>
-<li>单表列数目必须小于 30</li>
-<li>表必须有主键，例如自增主键<ul>
-<li>主键递增，数据行写入可以提高插入性能，可以避免 page 分裂，减少表碎片提升空间和内存的使用</li>
-<li>主键要选择较短的数据类型，InnoDB 引擎普通索引都会保存主键的值，较短的数据类型可以有效的减少索引的磁盘空间，提高索引的缓存效率</li>
-<li>无主键的表删除，在 row 模式的主从架构，会导致备库夯住</li>
-</ul>
-</li>
-<li>禁止使用外键，如果有外键完整性约束，需要应用程序控制<br>外键会导致表与表之间耦合，update 与 delete 操作都会涉及相关联的表，十分影响 sql 的性能，甚至会造成死锁。高并发情况下容易造成数据库性能，大数据高并发业务场景数据库使用以性能优先</li>
-</ul>
-<h1 id="字段设计规范"><a href="#字段设计规范" class="headerlink" title="字段设计规范"></a>字段设计规范</h1><ul>
-<li>必须把字段定义为 NOT NULL 并且提供默认值<ul>
-<li>null 的列使索引/索引统计/值比较都更加复杂，对MySQL来说更难优化</li>
-<li>null 这种类型 MySQL 内部需要进行特殊处理，增加数据库处理记录的复杂性；同等条件下，表中有较多空字段的时候，数据库的处理性能会降低很多</li>
-<li>null 值需要更多的存储空间，无论是表还是索引中每行中的 null 的列都需要额外的空间来标识</li>
-<li>对 null 的处理时候，只能采用 is null 或 is not null，而不能采用 =、in、&lt;、&lt;&gt;、!=、not in 这些操作符号。如：where name != ‘chen’，如果存在 name 为 null 值的记录，查询结果就不会包含 name 为 null 值的记录</li>
-</ul>
-</li>
-<li>禁止使用 TEXT、BLOB 类型<br>会浪费更多的磁盘和内存空间，非必要的大量的大字段查询会淘汰掉热数据，导致内存命中率急剧降低，影响数据库性能</li>
-<li>禁止使用小数存储货币<br>使用整数，小数容易导致钱对不上</li>
-<li>必须使用 varchar(20) 存储手机号<ul>
-<li>涉及到区号或者国家代号，可能出现 +-()</li>
-<li>手机号不会去做数学运算</li>
-<li>varchar 可以支持模糊查询，例如： like”4396%”</li>
-</ul>
-</li>
-<li>禁止使用 ENUM，可使用 TINYINT 代替<ul>
-<li>增加新的 ENUM 值要做 DDL 操作</li>
-<li>ENUM 的内部实际存储就是整数，并不是自己定义的字符串</li>
-</ul>
-</li>
-</ul>
-<h1 id="索引设计规范"><a href="#索引设计规范" class="headerlink" title="索引设计规范"></a>索引设计规范</h1><ul>
-<li>单表索引建议控制在 5 个以内</li>
-<li>单索引字段数不允许超过 5 个<br>字段超过 5 个时，实际已经起不到有效过滤数据的作用了</li>
-<li>禁止在更新十分频繁、区分度不高的属性上建立索引<ul>
-<li>更新会变更 B+ 树，更新频繁的字段建立索引会大大降低数据库性能</li>
-<li>”性别“这种区分度不大的属性，建立索引是没有什么意义的，不能有效过滤数据，性能与全表扫描类似</li>
-</ul>
-</li>
-<li>建立组合索引，必须把区分度高的字段放在前面<br>能够更加有效的过滤数据</li>
-</ul>
-<h1 id="SQL-使用规范"><a href="#SQL-使用规范" class="headerlink" title="SQL 使用规范"></a>SQL 使用规范</h1><ul>
-<li>禁止使用 SELECT *，只获取必要的字段，需要显示说明列属性<ul>
-<li>读取不需要的列会增加 CPU，IO，NET 消耗</li>
-<li>不能有效的利用覆盖索引</li>
-<li>使用 SELECT * 容易在增加或者删除字段后出现程序 BUG</li>
-</ul>
-</li>
-<li>禁止使用 INSERT INTO t_xxx VALUES(xxx)，必须显示指定插入的列属性<br>容易在增加或者删除字段后出现程序 BUG</li>
-<li>禁止使用属性隐式转换<br>SELECT uid FROM t_user WHERE phone=4396 会导致全表扫描，而不能命中 phone 索引</li>
-<li>禁止在 WHERE 条件的属性上使用函数或者表达式<br>SELECT uid FROM t_user WHERE from_unixtime(day)&gt;=’2017-01-15’ 会导致全表扫描<br>正确的写法是：SELECT uid FROM t_user WHERE day&gt;= unix_timestamp(‘2017-01-15 00:00:00’)</li>
-<li>禁止负向查询，以及%开头的模糊查询<ul>
-<li>负向查询条件：NOT、!=、&lt;&gt;、!&lt;、!&gt;、NOT IN、NOT LIKE等，会导致全表扫描</li>
-<li>%开头的模糊查询、会导致全表扫描</li>
-</ul>
-</li>
-<li>禁止大表使用 JOIN 查询，禁止大表使用子查询<br>会产生临时表，消耗较多内存与CPU、极大影响数据库性能</li>
-<li>禁止使用 OR 条件，必须改为 IN 查询<br>旧版本 MySQL 的 OR 查询是不能命中索引的，即使能命中索引，会让数据库耗费更多的 CPU 帮助实施查询优化</li>
-<li>应用程序必须捕获 SQL 异常，并有相应处理</li>
-<li>同表的增删字段、索引合并一条 DDL 语句执行，提高执行效率，减少与数据库的交互</li>
-</ul>
-<blockquote>
+          <blockquote>
 <p>大数据量高并发的互联网业务，极大影响数据库性能的都不让用。</p>
 </blockquote>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/25/mysql-standard/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -745,85 +672,14 @@
 
       
         
-          
-            <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="基本能力"><a href="#基本能力" class="headerlink" title="基本能力"></a>基本能力</h2><ul>
-<li><p>PHP 7 新特性，哪些语法或特性比较实用？</p>
-</li>
-<li><p>如下浮点数为什么计算是57？</p>
-  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$f = <span class="number">0.58</span>;</span><br><span class="line">var_dump(intval($f * <span class="number">100</span>)); <span class="comment">//结果输出57</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>include_once() 和 require_once() 有什么区别?</p>
-</li>
-<li><p>下列 HTTP 状态码出现的可能原因，如何处理？<br>  201,301,302,400,404,500,504</p>
-</li>
-<li>实现收货地址增删改查的功能，如何设计数控库表？</li>
-<li>命名空间有啥好处？要如何使用 MVC 架构去开发网站？如果不用会产生什么问题？</li>
-<li>如何配置 PHP 错误日志文件？</li>
-<li>如何拿到用户的 IP ？</li>
-<li><p>给出下面的例子，如何判断一个数是不是奇数？</p>
-  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$arr = [</span><br><span class="line">    <span class="string">"0"</span> =&gt; <span class="string">"Even"</span>,</span><br><span class="line">    <span class="string">"1"</span> =&gt; <span class="string">"Odd"</span>,</span><br><span class="line">];</span><br><span class="line">$check = <span class="number">13</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>给你一个由数字组成的字符串，如何获得他们的总和？<br>  例如：给你一个字符串 1,2,3,4,5,6,7 如何将这些数字相加，获得总和</p>
-</li>
-<li>如何部署线上代码，是否实践过 CI 自动部署？</li>
-<li><p>请使用正则表达式拿到页面的编码类型 <code>utf-8</code></p>
-  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE HTML&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">'Content-Type'</span> <span class="attr">content</span>=<span class="string">'text/html'</span> <span class="attr">charset</span>=<span class="string">'utf-8'</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>测试题<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>AJAX 如何实现跨域请求？后端安全上需要做什么处理？</p>
-</li>
-<li>private，protect，public 有什么区别？</li>
-<li>如何生成一个唯一的用户 id，避免别人猜测出当前系统的用户量和下一个用户 id？</li>
-<li>session 和 cookie 有什么区别？</li>
-<li>XSS 注入如何防范？</li>
-<li>SQL 注入如何防范？</li>
-<li>服务器常用命令有哪些？如何查看服务器负载？如何判断服务器配置好坏？</li>
-<li>本地是如何搭建开发环境的？是否使用过 Docker 自己搭建开发环境？</li>
-<li>假设你必须要实现一个类 <code>Dragonball</code>，这个类有一个属性 <code>ballCount</code>（初始值为0）和一个方法 <code>iFoundaBall</code>，当通过类的实例调用 <code>iFoundaBall</code> 方法时，ballCount 会递增 1，当 ballCount 等于 7 的时候，iFoundaBall 会输出 <code>你可以输出一个愿望</code>，并且该实例的 ballCount 重置为 0，你会如何实现这个类？</li>
-<li>如何生成唯一的订单号，满足尽可能短，能够看出是哪一天的订单？</li>
-</ul>
-<h2 id="框架熟悉程度"><a href="#框架熟悉程度" class="headerlink" title="框架熟悉程度"></a>框架熟悉程度</h2><ul>
-<li>了解并使用过哪些框架？写过哪些东西？各自有什么优缺点？</li>
-<li>类自动加载是如何实现的？</li>
-<li><code>http://demo.dev/articles/22</code> 在框架里如何获取 url 中 <code>22</code> 这个值？</li>
-<li>依赖注入有什么好处？请举个使用实例</li>
-</ul>
-<h2 id="工具和应用"><a href="#工具和应用" class="headerlink" title="工具和应用"></a>工具和应用</h2><h3 id="git-回答"><a href="#git-回答" class="headerlink" title="git 回答"></a>git 回答</h3><ul>
-<li>从哪些渠道详细了解过 git 的原理，常用操作？与 svn 的对比？</li>
-<li><code>git fetch</code> 与 <code>git pull</code> 有什么区别？</li>
-<li>把文件添加到索引区后又修改了文件，如何丢弃更改（恢复至之前添加到索引去的状态）？</li>
-<li>安装并使用过哪些 PHP 程序？觉得哪个程序好用，易用？</li>
-<li>请简述如何分析 nginx 日志以找出某个 IP 下访问量前 10 的 url？</li>
-<li>除了 PHP，是否用其他编程语言做出过小工具或成熟应用？</li>
-<li>有 a, b, c, d 四个任务，任务用户可以重复做，但任务是每天凌晨3点刷新的（如果当天0-3点做过一次任务，当天3-24点还可以再做一次，如果当天是3-24点做的任务，只能第二天3点后再做任务），任务做完后可以去 <code>领奖 API</code> 领奖，用户访问 <code>领奖 API</code>时会传递任务id，另外提供以下信息<ul>
-<li>用户访问 <code>领奖 API</code> 的时间不确定，任何时间都有可能</li>
-<li>请确保用户每天只能领奖一次，做完任务才能领奖</li>
-<li>如果昨天 3 点至今天 3 点期间用户做了任务，但未领奖，今天 3 点后就不能领取昨天的奖励了</li>
-<li>请问这个功能如何设计数据库表结构，<code>领奖 API</code> 如何判断当前用户能不能领奖？请写下必须的 SQL 和 PHP 代码</li>
-</ul>
-</li>
-</ul>
-<h2 id="加分项测试"><a href="#加分项测试" class="headerlink" title="加分项测试"></a>加分项测试</h2><p>以下测试，了解或者拥有就打钩</p>
-<h3 id="PSR-规范"><a href="#PSR-规范" class="headerlink" title="PSR 规范"></a>PSR 规范</h3><ul>
-<li>PSR 2</li>
-<li>PSR 4</li>
-<li>PSR 7</li>
-</ul>
-<h3 id="个人影响力"><a href="#个人影响力" class="headerlink" title="个人影响力"></a>个人影响力</h3><ul>
-<li>拥有个人博客</li>
-<li>拥有 GitHub 账号</li>
-<li>拥有 Stack Overflow 账号</li>
-</ul>
-<h3 id="英语能力"><a href="#英语能力" class="headerlink" title="英语能力"></a>英语能力</h3><ul>
-<li>通过英语四级</li>
-<li>通过英语六级</li>
-</ul>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
-<li>了解 Markdown</li>
-<li>搭建过 VPS 以访问国外网站</li>
-<li>使用抓包工具 fiddler 或者 charles 分析过 HTTPS 协议的网站或者 API</li>
-</ul>
-
-          
+          <p>JD 线下笔试题<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/25/jd-interview-question/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

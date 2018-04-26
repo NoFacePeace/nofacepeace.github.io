@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="基本规范 必须使用 InnoDB 存储引擎  支持事务、行级锁、并发性能更好、CPU 及内存缓存页优化使得资源利用率更高 必须使用 UTF-8 字符集  万国码，无需转码，无乱码风险，节省空间 数据表、数据字段必须加入中文注释  明示该字段是干什么的 禁止使用存储过程、视图、触发器、Event  高并发大数据的互联网业务，架构设计思路是”解放数据库 CPU，将计算过转移到服务层“，并发量大的情况">
+<meta name="description" content="大数据量高并发的互联网业务，极大影响数据库性能的都不让用。">
 <meta name="keywords" content="MySQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL 使用规范">
 <meta property="og:url" content="http://blog.orzcn.cn/2018/04/25/mysql-standard/index.html">
 <meta property="og:site_name" content="NoFacePeace">
-<meta property="og:description" content="基本规范 必须使用 InnoDB 存储引擎  支持事务、行级锁、并发性能更好、CPU 及内存缓存页优化使得资源利用率更高 必须使用 UTF-8 字符集  万国码，无需转码，无乱码风险，节省空间 数据表、数据字段必须加入中文注释  明示该字段是干什么的 禁止使用存储过程、视图、触发器、Event  高并发大数据的互联网业务，架构设计思路是”解放数据库 CPU，将计算过转移到服务层“，并发量大的情况">
+<meta property="og:description" content="大数据量高并发的互联网业务，极大影响数据库性能的都不让用。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-26T11:45:58.977Z">
+<meta property="og:updated_time" content="2018-04-26T12:02:35.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL 使用规范">
-<meta name="twitter:description" content="基本规范 必须使用 InnoDB 存储引擎  支持事务、行级锁、并发性能更好、CPU 及内存缓存页优化使得资源利用率更高 必须使用 UTF-8 字符集  万国码，无需转码，无乱码风险，节省空间 数据表、数据字段必须加入中文注释  明示该字段是干什么的 禁止使用存储过程、视图、触发器、Event  高并发大数据的互联网业务，架构设计思路是”解放数据库 CPU，将计算过转移到服务层“，并发量大的情况">
+<meta name="twitter:description" content="大数据量高并发的互联网业务，极大影响数据库性能的都不让用。">
 
 
 
@@ -376,7 +376,10 @@
       
 
       
-        <a id="more"></a>
+        <blockquote>
+<p>大数据量高并发的互联网业务，极大影响数据库性能的都不让用。</p>
+</blockquote>
+<a id="more"></a>
 <h1 id="基本规范"><a href="#基本规范" class="headerlink" title="基本规范"></a>基本规范</h1><ul>
 <li>必须使用 InnoDB 存储引擎<br>  支持事务、行级锁、并发性能更好、CPU 及内存缓存页优化使得资源利用率更高</li>
 <li>必须使用 UTF-8 字符集<br>  万国码，无需转码，无乱码风险，节省空间</li>
@@ -453,9 +456,6 @@
 <li>应用程序必须捕获 SQL 异常，并有相应处理</li>
 <li>同表的增删字段、索引合并一条 DDL 语句执行，提高执行效率，减少与数据库的交互</li>
 </ul>
-<blockquote>
-<p>大数据量高并发的互联网业务，极大影响数据库性能的都不让用。</p>
-</blockquote>
 
       
     </div>
