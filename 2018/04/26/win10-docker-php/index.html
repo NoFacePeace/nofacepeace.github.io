@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="PHP,Win10,Docker," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="PHP 开发环境最佳实践">
+<meta name="keywords" content="PHP,Win10,Docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Win10 搭建基于 Docker 的 PHP 开发环境">
+<meta property="og:url" content="http://blog.orzcn.cn/2018/04/26/win10-docker-php/index.html">
+<meta property="og:site_name" content="NoFacePeace">
+<meta property="og:description" content="PHP 开发环境最佳实践">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-27T06:31:35.177Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Win10 搭建基于 Docker 的 PHP 开发环境">
+<meta name="twitter:description" content="PHP 开发环境最佳实践">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.orzcn.cn/2018/04/26/win10-docker-php/"/>
+
+
+
+
+
+  <title>Win10 搭建基于 Docker 的 PHP 开发环境 | NoFacePeace</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">NoFacePeace</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Personal Blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.orzcn.cn/2018/04/26/win10-docker-php/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chenhaotao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NoFacePeace">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Win10 搭建基于 Docker 的 PHP 开发环境</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-26T22:50:03+08:00">
+                2018-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/教程/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>PHP 开发环境最佳实践<br><a id="more"></a></p>
+<h1 id="必备条件"><a href="#必备条件" class="headerlink" title="必备条件"></a>必备条件</h1><ul>
+<li>Win10 Pro</li>
+</ul>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><ul>
+<li><a href="https://docs.docker.com/docker-for-windows/" target="_blank" rel="noopener">Docker For Windows</a></li>
+<li><a href="https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe" target="_blank" rel="noopener">Docker For Windows</a></li>
+</ul>
+<h2 id="开启-Win10-的-Hyper-V"><a href="#开启-Win10-的-Hyper-V" class="headerlink" title="开启 Win10 的 Hyper-V"></a>开启 Win10 的 Hyper-V</h2><ul>
+<li>BIOS 中开启虚拟化支持</li>
+<li>控制面板-&gt;程序-&gt;启用或关闭 Windows 功能-&gt;选中 Hyper-V</li>
+<li>安装 Docker For Windows<ul>
+<li>确认开启 Hyper-V，否则启动 Docker 的时候会提示开启 Hyper-V</li>
+<li>在 Docker 的 Settings-&gt; Advanced 调节 VM 内存大小，否则启动时可能会提示内存不足导致启动失败</li>
+<li>在 Docker 的 Setting-&gt;Share Drivers，勾选你需要的盘，否则可能会遇到 <code>Driver has not been shared</code> 的问题</li>
+<li>在 Docker 的 Settings-&gt;Deamon 中设置国内镜像地址 <code>https://registry.docker-cn.com</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><h2 id="通过-Laradock-安装-Nginx、MySQL-和-PHP"><a href="#通过-Laradock-安装-Nginx、MySQL-和-PHP" class="headerlink" title="通过 Laradock 安装 Nginx、MySQL 和 PHP"></a>通过 Laradock 安装 Nginx、MySQL 和 PHP</h2><h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><ol>
+<li>创建工作目录<br>如新建 <code>webroot</code> 目录，laradock 源码和项目代码都将放在该工作目录下<br>（注：工作目录可任意创建，也可直接使用以前的 web 根目录）</li>
+<li><p>克隆 Laradock 代码<br>进入 webroot 工作目录，执行以下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/laradock/laradock.git</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成 Laradock 配置文件<br>进入 laradock 文件夹，将 <code>env-example</code> 复制一份，重命名为 <code>.env</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp env-example .env</span><br></pre></td></tr></table></figure>
+<p>如需配置 Nginx、 MySQL 等，均在 .env 文件中配置即可。</p>
+</li>
+<li><p>编译容器和运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d nginx mysql</span><br></pre></td></tr></table></figure>
+<p><code>workspace</code> 和 <code>php-fpm</code> 将会自动运行，不需要指定。<br>运行此命令后，通过浏览器访问 <code>http://localhost</code> 发现已经可以访问 nginx 服务了，只是报了 <code>404 Not Found</code> 错误</p>
+</li>
+<li><p>解决 <code>404 Not Found</code> 问题<br>打开 <code>laradock/nginx/sites/default.conf</code>，发现 <code>root</code> 为 <code>/var/www/public</code>。在不改配置文件的情况下，只需在 <code>webroot</code> 目录下新建 <code>public/index.html</code> 文件，<code>http://localhost</code> 即可正常访问。</p>
+<p>因为 <code>laradock</code> 目录的上级目录，即 <code>webroot/</code> 目录，被映射到了 <code>workspace</code> 容器内 <code>/var/www</code> 下作为数据卷。</p>
+</li>
+<li><p>更换 <code>laradock_backend</code> 的网段</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ docker network ls</span><br><span class="line">NETWORK ID          NAME                DRIVER              SCOPE</span><br><span class="line">2c7d80947a75        bridge              bridge              <span class="built_in">local</span></span><br><span class="line">64f81a5b77bc        host                host                <span class="built_in">local</span></span><br><span class="line">53b4385a3518        laradock_backend    bridge              <span class="built_in">local</span></span><br><span class="line">ae1e50111b8d        laradock_default    bridge              <span class="built_in">local</span></span><br><span class="line">17d8e36f8443        laradock_frontend   bridge              <span class="built_in">local</span></span><br><span class="line">629576403ca3        none                null                <span class="built_in">local</span></span><br></pre></td></tr></table></figure>
+<p>查看 <code>laradock_backend</code> 的网络信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ docker network inspect laradock_backend</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="string">"Name"</span>: <span class="string">"laradock_backend"</span>,</span><br><span class="line">      <span class="string">"Id"</span>: <span class="string">"53b4385a3518c057963538c2d071cecaa7955f3ef79bae988d8e823df8a337d6"</span>,</span><br><span class="line">      <span class="string">"Created"</span>: <span class="string">"2017-12-05T12:22:36.738920519Z"</span>,</span><br><span class="line">      <span class="string">"Scope"</span>: <span class="string">"local"</span>,</span><br><span class="line">      <span class="string">"Driver"</span>: <span class="string">"bridge"</span>,</span><br><span class="line">      <span class="string">"EnableIPv6"</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="string">"IPAM"</span>: &#123;</span><br><span class="line">          <span class="string">"Driver"</span>: <span class="string">"default"</span>,</span><br><span class="line">          <span class="string">"Options"</span>: null,</span><br><span class="line">          <span class="string">"Config"</span>: [</span><br><span class="line">              &#123;</span><br><span class="line">                  <span class="string">"Subnet"</span>: <span class="string">"172.20.0.0/16"</span></span><br><span class="line">              &#125;</span><br><span class="line">          ]</span><br><span class="line">      &#125;,&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到 <code>laradock_backend</code> 的网段是 <code>172.20.0.0/16</code>，而 gitlab 的 IP 地址是 <code>172.20.39.31</code><br><code>workspace</code> 使用了 <code>laradock_backend</code> 这个网络，因为 <code>laradock_backend</code> 网络与公司的网络冲突了，所以在 <code>workspace</code> 容器里无法正常访问 gitlab</p>
+<p>具体应用场景如下：某个 PHP composer 放在 gitlab，然后就无法通过 composer 安装了<br><em>解决方案如下：</em></p>
+<p>修改 <code>laradock</code> 目录下的 <code>docker-compose.yml</code> 文件，找到 <code>Networks Setup</code> 这段，修改如下内容</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### Networks Setup ############################################</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line"><span class="attr">  frontend:</span></span><br><span class="line"><span class="attr">    driver:</span> <span class="string">"bridge"</span></span><br><span class="line"><span class="attr">  backend:</span></span><br><span class="line"><span class="attr">    driver:</span> <span class="string">"bridge"</span></span><br><span class="line"><span class="attr">    ipam:</span></span><br><span class="line"><span class="attr">      driver:</span> <span class="string">default</span></span><br><span class="line"><span class="attr">      config:</span></span><br><span class="line"><span class="attr">        - subnet:</span> <span class="number">172.21</span><span class="number">.0</span><span class="number">.0</span><span class="string">/16</span></span><br></pre></td></tr></table></figure>
+<p>然后执行如下命令删除 laradock 管理的容器，并重新编译和运行容器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除这个项目里 docker-compose 管理的容器</span></span><br><span class="line">docker-compose down</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重新编译和运行容器</span></span><br><span class="line">docker-compose up -d nginx mysql</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Nginx 配置虚拟主机</p>
+<p> <code>laradock/nginx/sites/</code> 目录下新建配置文件，如 <code>test.conf</code>，内如如下：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line"></span><br><span class="line">    listen 80;</span><br><span class="line">    listen [::]:80;</span><br><span class="line"></span><br><span class="line">    server_name test.com;</span><br><span class="line">    root /var/www/<span class="built_in">test</span>;</span><br><span class="line">    index index.php index.html index.htm;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        try_files <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.php<span class="variable">$is_args</span><span class="variable">$args</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        try_files <span class="variable">$uri</span> /index.php =404;</span><br><span class="line">        fastcgi_pass php-upstream;</span><br><span class="line">        fastcgi_index index.php;</span><br><span class="line">        fastcgi_buffers 16 16k;</span><br><span class="line">        fastcgi_buffer_size 32k;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME <span class="variable">$document_root</span><span class="variable">$fastcgi_script_name</span>;</span><br><span class="line">        include fastcgi_params;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ /\.ht &#123;</span><br><span class="line">        deny all;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> <code>webroot</code> 目录下新建 <code>test/index.php</code> 测试文件，此时的工作目录结构类似：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-- webroot</span><br><span class="line">---- laradock</span><br><span class="line">---- <span class="built_in">test</span></span><br><span class="line">-------- index.php</span><br></pre></td></tr></table></figure>
+<p> <code>hosts</code> 文件中做域名映射 <code>127.0.0.1 test.com</code></p>
+<p> 停止、构建、重启容器，在 <code>laradock</code> 目录下执行以下命令即可：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker-compose down</span><br><span class="line">docker-compose build nginx</span><br><span class="line">docker-compose up<span class="_">-d</span> nginx mysql</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Docker-常用命令"><a href="#Docker-常用命令" class="headerlink" title="Docker 常用命令"></a>Docker 常用命令</h3><h3 id="Docker-中如何运行-Composer"><a href="#Docker-中如何运行-Composer" class="headerlink" title="Docker 中如何运行 Composer"></a>Docker 中如何运行 Composer</h3><p>在 <code>laradock</code> 目录下，执行 <code>docker-compose exec workspace bash</code>，进入 <code>Workspace</code> 容器，然后可直接运行 <code>Composer</code> 命令<br>如果在 <code>workspace</code> 里装了 <code>zsh</code>，可执行如下命令进入 <code>workspace</code> 容器，<code>docker-compse exec workspace zsh</code></p>
+<h3 id="在普通的命令行环境下运行-docker-命令"><a href="#在普通的命令行环境下运行-docker-命令" class="headerlink" title="在普通的命令行环境下运行 docker 命令"></a>在普通的命令行环境下运行 docker 命令</h3><h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ol>
+<li>如果在容器中起用了 MySQL 服务，则项目中 db 配置的 <code>dsn</code> 的 <code>host</code> 应该为 <code>mysql</code></li>
+<li>导入 sql 文件到 mysql 中的命令为 <code>docker exec -i [CONTRAINER_NAME] bash -c &quot;mysql -uroot -proot avatar&quot; &lt; open_initial.sql</code><br> <em>MySQL 服务的 <code>CONTRAINER_NAME</code> 可进入 <code>laradock</code> 目录下，执行 <code>docker ps</code> 命令进行查看。</em></li>
+<li>由于 Win10 重启之后会重新恢复到之前的工作状态（重新打开关机之前的软件），导致 Docker 可能出现问题，这种情况下请重启 Docker For Windows</li>
+</ol>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><h1 id="Docker-快速上手参考"><a href="#Docker-快速上手参考" class="headerlink" title="Docker 快速上手参考"></a>Docker 快速上手参考</h1><p>参考文献：<br><a href="https://yeasy.gitbooks.io/docker_practice/content/introduction/" target="_blank" rel="noopener">Docker 从入门到实战</a><br><a href="http://laravelacademy.org/tags/laradock" target="_blank" rel="noopener">Laradock 使用教程</a></p>
+<h2 id="Docker常用命令"><a href="#Docker常用命令" class="headerlink" title="Docker常用命令"></a>Docker常用命令</h2><p>进入 laradock 目录下，才能执行 docker-compose 命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># List images</span></span><br><span class="line">docker-compose images</span><br><span class="line"><span class="comment"># 查看当前正在运行的容器（服务）</span></span><br><span class="line">docker-compose ps</span><br><span class="line">// 这个命令对于调试来说很有用，有的时候需要知道某个容器是否运行了</span><br><span class="line">// 比如我曾经想连接容器里的 MySQL，但是端口并没有暴露给主机，怎么看端口有没有被暴露出来呢？这个命令就可以看了</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create and start containers up 表示启动容器，-d 表示后台运行</span></span><br><span class="line">docker-compose up -d nginx mysql</span><br><span class="line"><span class="comment"># 进入某个容器，如 workspace,mysql,nginx,php-fpm</span></span><br><span class="line">docker-compose <span class="built_in">exec</span> contrainer bash</span><br><span class="line"><span class="comment"># 重启容器</span></span><br><span class="line">docker-compose restart nginx</span><br><span class="line"><span class="comment"># 停止容器</span></span><br><span class="line">docker-compose stop nginx</span><br><span class="line"><span class="comment"># Stop and remove containers,networks,images,and volumes</span></span><br><span class="line">docker-compose down</span><br><span class="line"><span class="comment"># 使用 Dockerfile 创建镜像</span></span><br><span class="line">docker-compose build nginx</span><br><span class="line"><span class="comment"># 运行服务并强制创建容器</span></span><br><span class="line">docker-compose.exe up -d --force-recreate nginx</span><br></pre></td></tr></table></figure>
+<p>查看某个容器的信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出当前活动的所有容器</span></span><br><span class="line">$ docker ps</span><br><span class="line">CONTAINER ID        IMAGE                COMMAND                  CREATED             STATUS              PORTS</span><br><span class="line">                             NAMES</span><br><span class="line">dbcfc6315887        laradock_nginx       <span class="string">"nginx"</span>                  39 minutes ago      Up 39 minutes       0.0.0.0:80-&gt;80/tcp, 0.0.0.0:443-&gt;443/tcp   laradock_nginx_1</span><br><span class="line">e670dac545ce        laradock_php-fpm     <span class="string">"docker-php-entryp..."</span>   40 minutes ago      Up 39 minutes       9000/tcp</span><br><span class="line">                             laradock_php-fpm_1</span><br><span class="line">e2bb4e701147        laradock_workspace   <span class="string">"/sbin/my_init"</span>          40 minutes ago      Up 40 minutes       0.0.0.0:2222-&gt;22/tcp                       laradock_workspace_1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看某个容器</span></span><br><span class="line">$ docker inspect dbcfc6315887</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>当修改了 <code>docker-compose.yml</code>,<code>.env</code> 或任何 <code>dockerfile</code>，都需要重建容器，修改才会生效。</p>
+</blockquote>
+<h2 id="Docker-中登录和连接-MySQL-数据库"><a href="#Docker-中登录和连接-MySQL-数据库" class="headerlink" title="Docker 中登录和连接 MySQL 数据库"></a>Docker 中登录和连接 MySQL 数据库</h2><p>使用 <code>docker-compose exec mysql bash</code> 命令可进入 mysql 容器，默认账号和密码都是 <code>root</code>，使用 <code>mysql -u root -proot</code> 即可登录数据库。</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="每次开机自启动了-Docker，但-nginx-和-mysql-服务都需要手动启动"><a href="#每次开机自启动了-Docker，但-nginx-和-mysql-服务都需要手动启动" class="headerlink" title="每次开机自启动了 Docker，但 nginx 和 mysql 服务都需要手动启动"></a>每次开机自启动了 Docker，但 nginx 和 mysql 服务都需要手动启动</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> laradock</span><br><span class="line">docker-compose up -d nginx mysql</span><br></pre></td></tr></table></figure>
+<h2 id="docker-compose-exec-命令报错"><a href="#docker-compose-exec-命令报错" class="headerlink" title="$docker-compose exec 命令报错"></a>$docker-compose exec 命令报错</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose <span class="built_in">exec</span> workspace bash</span><br><span class="line">$ docker-compose <span class="built_in">exec</span> mysql bash</span><br><span class="line"></span><br><span class="line">the input device is not a TTY. If you are using mintty,try prefixing the <span class="built_in">command</span> with <span class="string">'winpty'</span></span><br></pre></td></tr></table></figure>
+<p>解决方案：<br><a href="http://willi.am/blog/2016/08/08/docker-for-windows-interactive-sessions-in-mintty-git-bash/" target="_blank" rel="noopener">Docker for Windows: Interactive Sessions in MinTTY Git Bash</a></p>
+<h2 id="Docker-中如何使用-Composer"><a href="#Docker-中如何使用-Composer" class="headerlink" title="Docker 中如何使用 Composer"></a>Docker 中如何使用 Composer</h2><p>在 <code>laradock</code> 目录下，执行 <code>docker-compose exec workspace bash</code>，进入 <code>workspace</code> 容器，然后直接运行 <code>composer</code> 命令即可。</p>
+<h2 id="Docker-中如何执行-php-命令"><a href="#Docker-中如何执行-php-命令" class="headerlink" title="Docker 中如何执行 php 命令"></a>Docker 中如何执行 php 命令</h2><p>进入 <code>php-fpm</code> 容器，执行 <code>php -v</code> 命令显示 php 版本信息，说明可执行 <code>php init</code> 等命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> laradock</span><br><span class="line">docker-compose <span class="built_in">exec</span> php-fpm bash</span><br><span class="line">// 或 docker-compose <span class="built_in">exec</span> workspace bash</span><br><span class="line">php -v</span><br></pre></td></tr></table></figure>
+<h2 id="如何获取-Docker-IP，使用-Navicat-连接-MySQL-数据库"><a href="#如何获取-Docker-IP，使用-Navicat-连接-MySQL-数据库" class="headerlink" title="如何获取 Docker IP，使用 Navicat 连接 MySQL 数据库"></a>如何获取 Docker IP，使用 Navicat 连接 MySQL 数据库</h2><p>执行 <code>ipconfig</code> 命令查看本机 IP 地址，使用即可</p>
+<h2 id="Docker-中-MySQL-数据库的导入导出"><a href="#Docker-中-MySQL-数据库的导入导出" class="headerlink" title="Docker 中 MySQL 数据库的导入导出"></a>Docker 中 MySQL 数据库的导入导出</h2><h3 id="使用-docker-exec-命令直接操作"><a href="#使用-docker-exec-命令直接操作" class="headerlink" title="使用 docker exec 命令直接操作"></a>使用 <code>docker exec</code> 命令直接操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> laradock</span><br><span class="line">$ docker ps // 查看 mysql 容器名称</span><br><span class="line">//执行导入</span><br><span class="line">$ docker <span class="built_in">exec</span> -i CONTRAINER_ANME mysql -u root -pPASSWORD DATABASE_NAME &lt; xxxxx.sql</span><br><span class="line">//执行导出</span><br><span class="line">$ docker <span class="built_in">exec</span> CONTRAINER_NAME mysqldump -u root  -pPASSWORD DATABASE_NAME [TABLE_NAME] &gt; XXXXX.sql</span><br></pre></td></tr></table></figure>
+<h3 id="进入-mysql-容器中进行操作"><a href="#进入-mysql-容器中进行操作" class="headerlink" title="进入 mysql 容器中进行操作"></a>进入 mysql 容器中进行操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> laradock</span><br><span class="line">$ docker-compose <span class="built_in">exec</span> mysql bash</span><br><span class="line">// 执行导出</span><br><span class="line">$ mysqldump -u root -p DATABASE_NAME [TABLE_NAME] &gt; XXXX.sql</span><br><span class="line">// 导入1</span><br><span class="line">$ mysql -u root -p DATABASE_NAME &lt; xxxx.sql</span><br><span class="line">// 导入2</span><br><span class="line">$ mysql -u root -p</span><br><span class="line">$ use DATABASE_NAME</span><br><span class="line">$ <span class="built_in">source</span> xxxxx.sql</span><br></pre></td></tr></table></figure>
+<h2 id="docker-compose-exec-CONTRAINER-bash-和-docker-exec-i-CONTRAINER-bash-的区别"><a href="#docker-compose-exec-CONTRAINER-bash-和-docker-exec-i-CONTRAINER-bash-的区别" class="headerlink" title="docker-compose exec CONTRAINER bash 和 docker exec -i CONTRAINER bash 的区别"></a><code>docker-compose exec CONTRAINER bash</code> 和 <code>docker exec -i CONTRAINER bash</code> 的区别</h2><p><code>docker-compose exec mysql bash</code> 可进入 mysql 容器<br><code>docker exec -i mysql bash</code> 提升 <code>Error: No such container:mysql</code></p>
+<p>解决:</p>
+<blockquote>
+<p>docker 命令行中要使用具体的容器名称，容器名称可进入到 <code>laradock</code> 目录下执行 <code>docker ps</code> 命令查看</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//如通过 `docker ps` 命令看到当前 Docker 中运行的 mysql 容器名称为 `laradock_mysql_1`</span><br><span class="line">$ docker <span class="built_in">exec</span> -it laradock_mysql_1 bash</span><br><span class="line">// 等同于</span><br><span class="line">$ docker-compose <span class="built_in">exec</span> mysql bash</span><br></pre></td></tr></table></figure>
+<h2 id="查看-Nginx-配置文件路径的方法"><a href="#查看-Nginx-配置文件路径的方法" class="headerlink" title="查看 Nginx 配置文件路径的方法"></a>查看 Nginx 配置文件路径的方法</h2><p>执行 <code>nginx -t</code> 命令时，Nginx 会去检测配置文件语法，并告知配置文件是否配置正确，同时就显示其配置文件路径。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ nginx -t</span><br><span class="line">nginx: the configuration file /etc/nginx/nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file /etc/nginx/nginx.conf <span class="built_in">test</span> is successful</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
+          
+            <a href="/tags/Win10/" rel="tag"># Win10</a>
+          
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/25/file-data-distinction/" rel="next" title="数据库系统与文件系统的区别">
+                <i class="fa fa-chevron-left"></i> 数据库系统与文件系统的区别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/logo.jpg"
+                alt="chenhaotao" />
+            
+              <p class="site-author-name" itemprop="name">chenhaotao</p>
+              <p class="site-description motion-element" itemprop="description">我本是sb,却装得酷酷滴!!!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#必备条件"><span class="nav-number">1.</span> <span class="nav-text">必备条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载"><span class="nav-number">2.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启-Win10-的-Hyper-V"><span class="nav-number">2.2.</span> <span class="nav-text">开启 Win10 的 Hyper-V</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#环境搭建"><span class="nav-number">3.</span> <span class="nav-text">环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#通过-Laradock-安装-Nginx、MySQL-和-PHP"><span class="nav-number">3.1.</span> <span class="nav-text">通过 Laradock 安装 Nginx、MySQL 和 PHP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装步骤"><span class="nav-number">3.1.1.</span> <span class="nav-text">安装步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-常用命令"><span class="nav-number">3.1.2.</span> <span class="nav-text">Docker 常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-中如何运行-Composer"><span class="nav-number">3.1.3.</span> <span class="nav-text">Docker 中如何运行 Composer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在普通的命令行环境下运行-docker-命令"><span class="nav-number">3.1.4.</span> <span class="nav-text">在普通的命令行环境下运行 docker 命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">3.2.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">3.3.</span> <span class="nav-text">参考链接</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker-快速上手参考"><span class="nav-number">4.</span> <span class="nav-text">Docker 快速上手参考</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker常用命令"><span class="nav-number">4.1.</span> <span class="nav-text">Docker常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-中登录和连接-MySQL-数据库"><span class="nav-number">4.2.</span> <span class="nav-text">Docker 中登录和连接 MySQL 数据库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">5.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#每次开机自启动了-Docker，但-nginx-和-mysql-服务都需要手动启动"><span class="nav-number">5.1.</span> <span class="nav-text">每次开机自启动了 Docker，但 nginx 和 mysql 服务都需要手动启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-compose-exec-命令报错"><span class="nav-number">5.2.</span> <span class="nav-text">$docker-compose exec 命令报错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-中如何使用-Composer"><span class="nav-number">5.3.</span> <span class="nav-text">Docker 中如何使用 Composer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-中如何执行-php-命令"><span class="nav-number">5.4.</span> <span class="nav-text">Docker 中如何执行 php 命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何获取-Docker-IP，使用-Navicat-连接-MySQL-数据库"><span class="nav-number">5.5.</span> <span class="nav-text">如何获取 Docker IP，使用 Navicat 连接 MySQL 数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-中-MySQL-数据库的导入导出"><span class="nav-number">5.6.</span> <span class="nav-text">Docker 中 MySQL 数据库的导入导出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-docker-exec-命令直接操作"><span class="nav-number">5.6.1.</span> <span class="nav-text">使用 docker exec 命令直接操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进入-mysql-容器中进行操作"><span class="nav-number">5.6.2.</span> <span class="nav-text">进入 mysql 容器中进行操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-compose-exec-CONTRAINER-bash-和-docker-exec-i-CONTRAINER-bash-的区别"><span class="nav-number">5.7.</span> <span class="nav-text">docker-compose exec CONTRAINER bash 和 docker exec -i CONTRAINER bash 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看-Nginx-配置文件路径的方法"><span class="nav-number">5.8.</span> <span class="nav-text">查看 Nginx 配置文件路径的方法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chenhaotao</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
