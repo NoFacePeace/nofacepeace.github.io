@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[创建和发布自己的 Composer 包]]></title>
+    <url>%2F2018%2F04%2F28%2Fcomposer%2F</url>
+    <content type="text"><![CDATA[I wonder how to create your own bundle and then add it as an installation package for the Composer. 创建 Composer 包 创建包目录 1mkdir library 创建源代码目录 12cd librarymkdir src 初始化 composer.json 文件 12# 根目录composer init 编辑 composer.json 文件，配置自动加载 123456789101112131415161718&#123; "name": "chenhaotao/library", "description": "My Library", "type": "library", "authors": [ &#123; "name": "chenhaotao", "email": "cht@orzcn.cn" &#125; ], "minimum-stability": "stable", "require": &#123;&#125;, "autoload": &#123; "psr-4": &#123; "chenhaotao\\library\\": "src/" &#125; &#125;&#125; 有效性检测 12# 根目录composer validate 创建 Test 类 12cd srctouch Test.php 123456789&lt;?phpnamespace chenhaotao\library;class Test&#123; public function hello() &#123; echo "Hello world!"; &#125;&#125; 发布 Composer 包 在 Github 上创建包仓库 把包代码提交到 Github 123456git inittouch README.mdgit add *git commit -m "fix: 创建 Test 类"git remote add origin git@github.com:NoFacePeace/library.gitgit push -u origin master 把自定义包导入项目中 配置 composer.json 文件 1234567891011121314151617181920&#123; "name": "cht/test", "authors": [ &#123; "name": "cht", "email": "736090467@qq.com" &#125; ], // 使用自定义的包资源库 "repositories": [ &#123; "type": "vcs", "url": "https://github.com/NoFacePeace/library" &#125; ], // 导入自定义包 "require": &#123; "chenhaotao/library": "dev-master" &#125;&#125; 下载和更新依赖 123# 根目录composer installcomposer update 测试自定义包是否导入成功 1touch test.php 1234567&lt;?phprequire 'vendor/autoload.php';use chenhaotao\library\Test;$obj = new Test();$obj-&gt;hello(); 1php test.php 传送门 参考1 参考2]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>PHP</tag>
+        <tag>Composer</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[项目启用 CI]]></title>
     <url>%2F2018%2F04%2F28%2Fci%2F</url>
     <content type="text"><![CDATA[如何在 PHP 项目中启用 CI 已知信息 CI: 用的是 Gitlab CI Linux 服务器: CentOS 7 Docker: 使用 Docker CE （社区版） 升级 CentOS确保 CentOS 尽可能的新，要不然很多依赖是旧的，解决起来比较费时 安装 GitLab Runner 添加 GitLab 官方仓库 1curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | sudo bash 安装最新的 GitLab Runner 12345# 安装最新版本sudo yum install gitlab-runner# 安装指定版本yum list gitlab-runner --showduplicates | sort -rsudo yum install gitlab-runner-10.0.0-1 注册 GitLab Runner打开项目的 CI/CD 设置页 注意查看以下内容 gitlab-ci 的 coordinator URL registration token 执行如下命令注册 Runner 1sudo gitlab-runner register 按照提示填写信息即可，有几个注意的地方 runner 可以按照 tag 来管理，CI 任务可以设置只能由指定 tag 的 runner 执行 runner 可以限定是否只能运行当前项目的 CI 任务，默认是只能运行当前项目的任务 GitLab Runner 的 executor 类型有 parallels,virtualbox,kubernetes,docker,docker-ssh,shell,ssh,docker+machine,docker-ssh+machine 对于 PHP 项目来说一般就用两个 ssh 类型，用于自动部署代码 docker 类型，用于静态分析 PHP 代码，代码风格检查 安装 Docker使用阿里云的源 安装必要的包，yumj-utils provides the yum-config-manager utility,and device-mapper-presistent-data and lvm2 are required by the devicemapper storage driver 123sudo yum install -y yum-utils \device-mapper-presistent-data \lvm2 添加软件源信息 1sudo yum-config-manager --add-repo http://mirrors.aliyum.com/docker-ce/linux/centos/docker-ce.repo 更新源缓存并安装 Docker-CE 12sudo yum makecache fastsudo yum -y install docker-ce 开启 docker 服务 1sudo systemctl start docker 让项目启用 CI添加 .gitlab-ci.yml 文件在项目里添加 .gitlab-ci.yml，文件内容参考官方文档 启用 CI 客户端（Runner）去项目的 CI/CD 设置页，启用 runner 测试 CI执行完上述两个步骤，每次 push 完代码，就可以去项目的 pipelines 页查看 CI 的执行情况了 CI 用途自动部署去项目的 settings/repository 页面设置 Deploy Keys 这样 Runner 才有权限去拉取项目的代码 参考资料 Get Docker CE for CentOS Install GitLab Runner using the official GitLab repositories]]></content>
@@ -177,8 +189,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>面试</tag>
+        <tag>Java</tag>
         <tag>排序</tag>
       </tags>
   </entry>
@@ -377,8 +389,8 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>Git</tag>
         <tag>Github</tag>
+        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
