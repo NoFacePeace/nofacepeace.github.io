@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[PHP 代码风格检查，代码静态分析]]></title>
+    <url>%2F2018%2F04%2F29%2Fphp-code-detection%2F</url>
+    <content type="text"><![CDATA[使用 Github CI 自动进行代码风格检查，代码静态分析 规范 Commit message 和 Change log 编写指南 使用 GitLab CI 自动进行代码风格检查, 代码静态分析 工具代码风格检查 squizlabs/PHP_CodeSniffer pt-support/yii2-coding-standards 下面示例中末尾处的 . 代表检查当前目录下的代码 代码库里换行符是 LF。但 Windows 平台是 CRLF，因此在 Windows 下测试时需要修改换行符规则，修改 clone 下来的规则 ruleset.xml，增加以下配置。 12345&lt;rule ref="Generic.Files.LineEndings"&gt; &lt;properties&gt; &lt;property name="eolChar" value="\r\n"/&gt; &lt;/properties&gt;&lt;/rule&gt; 执行以下命令可以检查代码风格问题 1234567# clone coding standardgit clone http://git.jd.com/pt-support/yii2-coding-standards.git /tmp/yii-coding-standards# check coding style./vendor/bin/phpcs --extensions=php --standard=/tmp/yii-coding-standards/Yii2 .# or./vendor/squizlabs/php_codesniffer/bin/phpcs --extensions=php --standard=/tmp/yii-coding-standards/Yii2 . Windows 下如果使用 Docker 搭建 PHP 开发环境， ./vendor/bin/phpcs 不是有效的软链接文件，需要直接访问原始文件才能正常执行 静态分析工具 phpstan/phpstan 自动化代码评审 CODEBEAT CODE CLIMATE CODACY Wikipedia: Automated code review]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>PHP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[创建和发布自己的 Composer 包]]></title>
     <url>%2F2018%2F04%2F28%2Fcomposer%2F</url>
     <content type="text"><![CDATA[I wonder how to create your own bundle and then add it as an installation package for the Composer. 创建 Composer 包 创建包目录 1mkdir library 创建源代码目录 12cd librarymkdir src 初始化 composer.json 文件 12# 根目录composer init 编辑 composer.json 文件，配置自动加载 123456789101112131415161718&#123; "name": "chenhaotao/library", "description": "My Library", "type": "library", "authors": [ &#123; "name": "chenhaotao", "email": "cht@orzcn.cn" &#125; ], "minimum-stability": "stable", "require": &#123;&#125;, "autoload": &#123; "psr-4": &#123; "chenhaotao\\library\\": "src/" &#125; &#125;&#125; 有效性检测 12# 根目录composer validate 创建 Test 类 12cd srctouch Test.php 123456789&lt;?phpnamespace chenhaotao\library;class Test&#123; public function hello() &#123; echo "Hello world!"; &#125;&#125; 发布 Composer 包 在 Github 上创建包仓库 把包代码提交到 Github 123456git inittouch README.mdgit add *git commit -m "fix: 创建 Test 类"git remote add origin git@github.com:NoFacePeace/library.gitgit push -u origin master 把自定义包导入项目中 配置 composer.json 文件 1234567891011121314151617181920&#123; "name": "cht/test", "authors": [ &#123; "name": "cht", "email": "736090467@qq.com" &#125; ], // 使用自定义的包资源库 "repositories": [ &#123; "type": "vcs", "url": "https://github.com/NoFacePeace/library" &#125; ], // 导入自定义包 "require": &#123; "chenhaotao/library": "dev-master" &#125;&#125; 下载和更新依赖 123# 根目录composer installcomposer update 测试自定义包是否导入成功 1touch test.php 1234567&lt;?phprequire 'vendor/autoload.php';use chenhaotao\library\Test;$obj = new Test();$obj-&gt;hello(); 1php test.php 传送门 参考1 参考2]]></content>
@@ -40,8 +51,8 @@
       </categories>
       <tags>
         <tag>PHP</tag>
-        <tag>Win7</tag>
         <tag>Docker</tag>
+        <tag>Win7</tag>
       </tags>
   </entry>
   <entry>
@@ -53,8 +64,8 @@
       </categories>
       <tags>
         <tag>PHP</tag>
-        <tag>Docker</tag>
         <tag>Win10</tag>
+        <tag>Docker</tag>
       </tags>
   </entry>
   <entry>
@@ -189,8 +200,8 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>面试</tag>
         <tag>Java</tag>
+        <tag>面试</tag>
         <tag>排序</tag>
       </tags>
   </entry>
