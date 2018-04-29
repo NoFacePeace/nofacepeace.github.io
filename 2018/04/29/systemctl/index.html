@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Github,Git," />
+  <meta name="keywords" content="Linux," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="初始化 Git 的一般步骤。">
-<meta name="keywords" content="Github,Git">
+<meta name="description" content="传送门 Systemd 入门教程：命令篇 Systemd 入门教程：实战篇">
+<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="初始化 Git">
-<meta property="og:url" content="http://blog.orzcn.cn/2018/02/05/initGit/index.html">
+<meta property="og:title" content="Linux 命令 systemctl">
+<meta property="og:url" content="http://blog.orzcn.cn/2018/04/29/systemctl/index.html">
 <meta property="og:site_name" content="NoFacePeace">
-<meta property="og:description" content="初始化 Git 的一般步骤。">
+<meta property="og:description" content="传送门 Systemd 入门教程：命令篇 Systemd 入门教程：实战篇">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-04T19:01:14.291Z">
+<meta property="og:updated_time" content="2018-04-29T08:34:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="初始化 Git">
-<meta name="twitter:description" content="初始化 Git 的一般步骤。">
+<meta name="twitter:title" content="Linux 命令 systemctl">
+<meta name="twitter:description" content="传送门 Systemd 入门教程：命令篇 Systemd 入门教程：实战篇">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.orzcn.cn/2018/02/05/initGit/"/>
+  <link rel="canonical" href="http://blog.orzcn.cn/2018/04/29/systemctl/"/>
 
 
 
 
 
-  <title>初始化 Git | NoFacePeace</title>
+  <title>Linux 命令 systemctl | NoFacePeace</title>
   
 
 
@@ -287,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.orzcn.cn/2018/02/05/initGit/">
+    <link itemprop="mainEntityOfPage" href="http://blog.orzcn.cn/2018/04/29/systemctl/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chenhaotao">
@@ -304,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">初始化 Git</h1>
+          <h1 class="post-title" itemprop="name headline">Linux 命令 systemctl</h1>
         
 
         <div class="post-meta">
@@ -316,8 +316,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-05T02:50:37+08:00">
-                2018-02-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-29T16:31:07+08:00">
+                2018-04-29
               </time>
             
 
@@ -376,22 +376,10 @@
       
 
       
-        <p>初始化 Git 的一般步骤。</p>
-<a id="more"></a>
-<h1 id="配置信息"><a href="#配置信息" class="headerlink" title="配置信息"></a>配置信息</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"Firstname lastname"</span></span><br><span class="line">git config --global user.email <span class="string">"your_email@example.com"</span></span><br><span class="line">git config --global color.ui auto</span><br></pre></td></tr></table></figure>
-<p>配置信息保存在 “~/.gitconfig” 文件里</p>
-<h1 id="设置-SSH-Key"><a href="#设置-SSH-Key" class="headerlink" title="设置 SSH Key"></a>设置 SSH Key</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"your_email@example.com"</span></span><br><span class="line">Generation public/private rsa key pair.</span><br><span class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key</span><br><span class="line">(/Users/your_user_directory/.ssh/id_rsa):  <span class="comment">#按回车键</span></span><br><span class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase):  <span class="comment">#输入密码</span></span><br><span class="line">Enter same passphrase again:  <span class="comment">#再次输入密码</span></span><br></pre></td></tr></table></figure>
-<p>id_rsa 文件是私有密钥，id_rsa.pub 是公开密钥</p>
-<h1 id="添加公开密钥"><a href="#添加公开密钥" class="headerlink" title="添加公开密钥"></a>添加公开密钥</h1><ol>
-<li>点击账户设定按钮（Settings）</li>
-<li>选择  SSH  and   GPG  keys</li>
-<li>点击 New SSH key</li>
-<li>Title 输入密钥名称</li>
-<li>Key 粘贴 id_rsa.pub 内容</li>
-<li>收到提示“公共密钥添加完成“的邮件</li>
-<li>认证和通信 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br><span class="line"><span class="comment"># 出现如下结果即为成功</span></span><br><span class="line">Hi hirocastest!You<span class="string">'ve successfully authenticated,but GitHub does no provide shell access.</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+        <h1 id="传送门"><a href="#传送门" class="headerlink" title="传送门"></a>传送门</h1><ul>
+<li><a href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html" target="_blank" rel="noopener">Systemd 入门教程：命令篇</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-part-two.html" target="_blank" rel="noopener">Systemd 入门教程：实战篇</a></li>
+</ul>
 
       
     </div>
@@ -409,9 +397,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Github/" rel="tag"># Github</a>
-          
-            <a href="/tags/Git/" rel="tag"># Git</a>
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
           
         </div>
       
@@ -424,8 +410,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/05/dbDesignSpecification/" rel="next" title="数据库设计规范">
-                <i class="fa fa-chevron-left"></i> 数据库设计规范
+              <a href="/2018/04/29/php-code-detection/" rel="next" title="PHP 代码风格检查，代码静态分析">
+                <i class="fa fa-chevron-left"></i> PHP 代码风格检查，代码静态分析
               </a>
             
           </div>
@@ -433,10 +419,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/02/07/daily/" rel="prev" title="日常生活作息">
-                日常生活作息 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -572,7 +554,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#配置信息"><span class="nav-number">1.</span> <span class="nav-text">配置信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置-SSH-Key"><span class="nav-number">2.</span> <span class="nav-text">设置 SSH Key</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加公开密钥"><span class="nav-number">3.</span> <span class="nav-text">添加公开密钥</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#传送门"><span class="nav-number">1.</span> <span class="nav-text">传送门</span></a></li></ol></div>
             
 
           </div>

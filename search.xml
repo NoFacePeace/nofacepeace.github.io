@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Linux 命令 systemctl]]></title>
+    <url>%2F2018%2F04%2F29%2Fsystemctl%2F</url>
+    <content type="text"><![CDATA[传送门 Systemd 入门教程：命令篇 Systemd 入门教程：实战篇]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[PHP 代码风格检查，代码静态分析]]></title>
     <url>%2F2018%2F04%2F29%2Fphp-code-detection%2F</url>
     <content type="text"><![CDATA[使用 Github CI 自动进行代码风格检查，代码静态分析 规范 Commit message 和 Change log 编写指南 使用 GitLab CI 自动进行代码风格检查, 代码静态分析 工具代码风格检查 squizlabs/PHP_CodeSniffer pt-support/yii2-coding-standards 下面示例中末尾处的 . 代表检查当前目录下的代码 代码库里换行符是 LF。但 Windows 平台是 CRLF，因此在 Windows 下测试时需要修改换行符规则，修改 clone 下来的规则 ruleset.xml，增加以下配置。 12345&lt;rule ref="Generic.Files.LineEndings"&gt; &lt;properties&gt; &lt;property name="eolChar" value="\r\n"/&gt; &lt;/properties&gt;&lt;/rule&gt; 执行以下命令可以检查代码风格问题 1234567# clone coding standardgit clone http://git.jd.com/pt-support/yii2-coding-standards.git /tmp/yii-coding-standards# check coding style./vendor/bin/phpcs --extensions=php --standard=/tmp/yii-coding-standards/Yii2 .# or./vendor/squizlabs/php_codesniffer/bin/phpcs --extensions=php --standard=/tmp/yii-coding-standards/Yii2 . Windows 下如果使用 Docker 搭建 PHP 开发环境， ./vendor/bin/phpcs 不是有效的软链接文件，需要直接访问原始文件才能正常执行 静态分析工具 phpstan/phpstan 自动化代码评审 CODEBEAT CODE CLIMATE CODACY Wikipedia: Automated code review]]></content>
