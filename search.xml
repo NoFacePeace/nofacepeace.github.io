@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[版本类型说明]]></title>
+    <url>%2F2018%2F04%2F30%2Fversion%2F</url>
+    <content type="text"><![CDATA[α 、β、λ 常用来表示软件测试过程中的三个阶段，α 是第一阶段，一般只供内部测试使用；β 是第二阶段，已经消除了软件中大部分的不完善之处，但仍有可能还存在缺陷和漏洞，一般只提供给特定的用户群来测试使用；λ 是第三阶段，此时产品已经相当成熟，只需在个别地方再做进一步的优化处理即可上市发行。 Alpha: 是内部测试版，一般不向外部发布，会有很多 Bug，一般只有测试人员使用 Beta：也是测试版，这个阶段的版本会一直加入新的功能。在 Alpha 版之后推出 RC：（Release Candidate）顾名思义么！用在软件上就是候选版本。系统平台上就是发行后新版本。RC版本不会再加入新的功能了，主要着重于除错 GA：General Availability，正式发布的版本，在国外都是用 GA 来说明 release 版本的 RTM：（Release to Manufacture）是给工厂大量压片的版本，内容跟正式版是一样的，不过 RTM 版也有出限制、评估版的。但是和正式版本的主要程序代码都是一样的 OEM: 是给计算机厂商随着计算机贩卖的，也就是随机版。只能随机器出货，不能零售。只能全新安装，不能从旧有操作系统升级。包装不像零售版精美，通常只有一面 CD 和说明书（授权书） RVL：号称是正式版，其实 RVL 根本不是版本的名称。它是中文版/英文版文档破解出来的 EVAL：而流通在网络上的 EVAL 版，与“评估版”类似，功能上和零售版没有区别 RTL：Retail（零售版）是真正的正式版，正式上架零售版。在安装盘的i386文件夹里有一个eula.txt，最后有一行EULAID，就是你的版本。比如简体中文正式版是EULAID:WX.4_PRO_RTL_CN，繁体中文正式版是WX.4_PRO_RTL_TW。其中：如果是WX.开头是正式版，WB.开头是测试版。_PRE，代表家庭版；_PRO，代表专业版。 传送门]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[小程序的运行流程]]></title>
+    <url>%2F2018%2F04%2F30%2Fwechat-mini-app%2F</url>
+    <content type="text"><![CDATA[开发者开发的工程文件打包上传到微信服务器 微信服务器经过处理，打包成 .wxapkg 格式文件放到 CDN 用户点击使用的时候，微信客户端从 CDN 下载该小程序的 .wxapkg 文件包 微信客户端解压 .wxapkg 包，得到 page-frame.html 和一些图片、js 文件，其中 js 文件会被引入到 page-frame.html 中 安卓微信客户端通过 activity，用 webview 来加载上一步骤解析出来的 page-frame.html 文件 小程序里面的数据，是通过 page-frame.html 里面引入的 js 文件动态加载，与 native 的通信也由 js 通过 jsbridge 的方式进行。 native 通过 activity 用 webview 加载本地的 html 文件 mina 框架mina 框架的面向对象是小程序开发者，作用是提供开发过程中的各个页面的组合，数据共享，页面配置，数据绑定，虚拟 DOM等功能的一个框架。]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>WeChat</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Linux 命令 systemctl]]></title>
     <url>%2F2018%2F04%2F29%2Fsystemctl%2F</url>
     <content type="text"><![CDATA[传送门 Systemd 入门教程：命令篇 Systemd 入门教程：实战篇]]></content>
@@ -62,8 +81,8 @@
       </categories>
       <tags>
         <tag>PHP</tag>
-        <tag>Docker</tag>
         <tag>Win7</tag>
+        <tag>Docker</tag>
       </tags>
   </entry>
   <entry>
@@ -75,8 +94,8 @@
       </categories>
       <tags>
         <tag>PHP</tag>
-        <tag>Win10</tag>
         <tag>Docker</tag>
+        <tag>Win10</tag>
       </tags>
   </entry>
   <entry>
@@ -336,7 +355,7 @@
   <entry>
     <title><![CDATA[VSCode]]></title>
     <url>%2F2018%2F02%2F15%2FVSCode%2F</url>
-    <content type="text"><![CDATA[在开发过程中，VSCode 常用的快捷方式 新建窗口：Ctrl + Shift + N 打开文件夹: Ctrl + K Ctrl + O 关闭文件夹: Ctrl + K F 向下插入一行： Ctrl + Enter 打开文件： Ctrl + O 文件另存为：Ctrl + Shift + S 打开/关闭终端： Ctrl + ` 替换：Ctrl + H 全部替换：Ctrl + Alt + Enter 选中：Ctrl + D 在当前目录下新建文件：Ctrl + Alt + N 隐藏右侧的预览面板 1&quot;editor.minimap.enabled&quot;: false,]]></content>
+    <content type="text"><![CDATA[在开发过程中，VSCode 常用的快捷方式 新建窗口：Ctrl + Shift + N 打开文件夹: Ctrl + K Ctrl + O 关闭文件夹: Ctrl + K F 向下插入一行： Ctrl + Enter 打开文件： Ctrl + O 文件另存为：Ctrl + Shift + S 打开/关闭终端： Ctrl + ` 替换：Ctrl + H 全部替换：Ctrl + Alt + Enter 选中：Ctrl + D 在当前目录下新建文件：Ctrl + Alt + N 隐藏右侧的预览面板 1&quot;editor.minimap.enabled&quot;: false, 恢复：Ctrl + Y 删除行：Ctrl + Shift + K]]></content>
       <categories>
         <category>教程</category>
       </categories>
