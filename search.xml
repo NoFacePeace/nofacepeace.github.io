@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[文档编写规范]]></title>
+    <url>%2F2018%2F05%2F01%2Fwrite-document%2F</url>
+    <content type="text"><![CDATA[有研究显示，打字的时候不喜欢在中文和英文之间加空格的人，感情路都走得很辛苦，有七成的比例会在 34 岁的时候跟自己不爱的人结婚，而其余三成的人最后只能把遗产留给自己的猫。毕竟爱情跟书写都需要适时地留白。 传送门 中文文案排版指北 Markdown 语法说明]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Markdown</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[版本类型说明]]></title>
     <url>%2F2018%2F04%2F30%2Fversion%2F</url>
     <content type="text"><![CDATA[α 、β、λ 常用来表示软件测试过程中的三个阶段，α 是第一阶段，一般只供内部测试使用；β 是第二阶段，已经消除了软件中大部分的不完善之处，但仍有可能还存在缺陷和漏洞，一般只提供给特定的用户群来测试使用；λ 是第三阶段，此时产品已经相当成熟，只需在个别地方再做进一步的优化处理即可上市发行。 Alpha: 是内部测试版，一般不向外部发布，会有很多 Bug，一般只有测试人员使用 Beta：也是测试版，这个阶段的版本会一直加入新的功能。在 Alpha 版之后推出 RC：（Release Candidate）顾名思义么！用在软件上就是候选版本。系统平台上就是发行后新版本。RC版本不会再加入新的功能了，主要着重于除错 GA：General Availability，正式发布的版本，在国外都是用 GA 来说明 release 版本的 RTM：（Release to Manufacture）是给工厂大量压片的版本，内容跟正式版是一样的，不过 RTM 版也有出限制、评估版的。但是和正式版本的主要程序代码都是一样的 OEM: 是给计算机厂商随着计算机贩卖的，也就是随机版。只能随机器出货，不能零售。只能全新安装，不能从旧有操作系统升级。包装不像零售版精美，通常只有一面 CD 和说明书（授权书） RVL：号称是正式版，其实 RVL 根本不是版本的名称。它是中文版/英文版文档破解出来的 EVAL：而流通在网络上的 EVAL 版，与“评估版”类似，功能上和零售版没有区别 RTL：Retail（零售版）是真正的正式版，正式上架零售版。在安装盘的i386文件夹里有一个eula.txt，最后有一行EULAID，就是你的版本。比如简体中文正式版是EULAID:WX.4_PRO_RTL_CN，繁体中文正式版是WX.4_PRO_RTL_TW。其中：如果是WX.开头是正式版，WB.开头是测试版。_PRE，代表家庭版；_PRO，代表专业版。 传送门]]></content>
@@ -81,8 +92,8 @@
       </categories>
       <tags>
         <tag>PHP</tag>
-        <tag>Win7</tag>
         <tag>Docker</tag>
+        <tag>Win7</tag>
       </tags>
   </entry>
   <entry>
@@ -94,8 +105,8 @@
       </categories>
       <tags>
         <tag>PHP</tag>
-        <tag>Docker</tag>
         <tag>Win10</tag>
+        <tag>Docker</tag>
       </tags>
   </entry>
   <entry>
