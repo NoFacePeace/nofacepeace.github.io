@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="WeChat," />
+  <meta name="keywords" content="sentry," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="开发者开发的工程文件打包上传到微信服务器 微信服务器经过处理，打包成 .wxapkg 格式文件放到 CDN 用户点击使用的时候，微信客户端从 CDN 下载该小程序的 .wxapkg 文件包 微信客户端解压 .wxapkg 包，得到 page-frame.html 和一些图片、js 文件，其中 js 文件会被引入到 page-frame.html 中 安卓微信客户端通过 activity，用 we">
-<meta name="keywords" content="WeChat">
+<meta name="description" content="Sentry provides open source error tracking that shows you every crash in your stack as it happens,with the details needed to prioritize,identify,reproduce,and fix each issue.">
+<meta name="keywords" content="sentry">
 <meta property="og:type" content="article">
-<meta property="og:title" content="小程序的运行流程">
-<meta property="og:url" content="http://blog.orzcn.cn/2018/04/30/wechat-mini-app/index.html">
+<meta property="og:title" content="Sentry 初体验">
+<meta property="og:url" content="http://blog.orzcn.cn/2018/05/03/sentry/index.html">
 <meta property="og:site_name" content="NoFacePeace">
-<meta property="og:description" content="开发者开发的工程文件打包上传到微信服务器 微信服务器经过处理，打包成 .wxapkg 格式文件放到 CDN 用户点击使用的时候，微信客户端从 CDN 下载该小程序的 .wxapkg 文件包 微信客户端解压 .wxapkg 包，得到 page-frame.html 和一些图片、js 文件，其中 js 文件会被引入到 page-frame.html 中 安卓微信客户端通过 activity，用 we">
+<meta property="og:description" content="Sentry provides open source error tracking that shows you every crash in your stack as it happens,with the details needed to prioritize,identify,reproduce,and fix each issue.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-30T02:35:04.033Z">
+<meta property="og:updated_time" content="2018-05-03T13:07:24.386Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小程序的运行流程">
-<meta name="twitter:description" content="开发者开发的工程文件打包上传到微信服务器 微信服务器经过处理，打包成 .wxapkg 格式文件放到 CDN 用户点击使用的时候，微信客户端从 CDN 下载该小程序的 .wxapkg 文件包 微信客户端解压 .wxapkg 包，得到 page-frame.html 和一些图片、js 文件，其中 js 文件会被引入到 page-frame.html 中 安卓微信客户端通过 activity，用 we">
+<meta name="twitter:title" content="Sentry 初体验">
+<meta name="twitter:description" content="Sentry provides open source error tracking that shows you every crash in your stack as it happens,with the details needed to prioritize,identify,reproduce,and fix each issue.">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.orzcn.cn/2018/04/30/wechat-mini-app/"/>
+  <link rel="canonical" href="http://blog.orzcn.cn/2018/05/03/sentry/"/>
 
 
 
 
 
-  <title>小程序的运行流程 | NoFacePeace</title>
+  <title>Sentry 初体验 | NoFacePeace</title>
   
 
 
@@ -287,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.orzcn.cn/2018/04/30/wechat-mini-app/">
+    <link itemprop="mainEntityOfPage" href="http://blog.orzcn.cn/2018/05/03/sentry/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chenhaotao">
@@ -304,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">小程序的运行流程</h1>
+          <h1 class="post-title" itemprop="name headline">Sentry 初体验</h1>
         
 
         <div class="post-meta">
@@ -316,8 +316,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-30T10:14:23+08:00">
-                2018-04-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-03T20:17:41+08:00">
+                2018-05-03
               </time>
             
 
@@ -376,18 +376,28 @@
       
 
       
-        <ul>
-<li>开发者开发的工程文件打包上传到微信服务器</li>
-<li>微信服务器经过处理，打包成 .wxapkg 格式文件放到 CDN</li>
-<li>用户点击使用的时候，微信客户端从 CDN 下载该小程序的 .wxapkg 文件包</li>
-<li>微信客户端解压 .wxapkg 包，得到 page-frame.html 和一些图片、js 文件，其中 js 文件会被引入到 page-frame.html 中</li>
-<li>安卓微信客户端通过 activity，用 webview 来加载上一步骤解析出来的 page-frame.html 文件</li>
-<li>小程序里面的数据，是通过 page-frame.html 里面引入的 js 文件动态加载，与 native 的通信也由 js 通过 jsbridge 的方式进行。</li>
-</ul>
-<blockquote>
-<p>native 通过 activity 用 webview 加载本地的 html 文件</p>
+        <blockquote>
+<p>Sentry provides open source error tracking that shows you every crash in your stack as it happens,with the details needed to prioritize,identify,reproduce,and fix each issue.</p>
 </blockquote>
-<h1 id="mina-框架"><a href="#mina-框架" class="headerlink" title="mina 框架"></a>mina 框架</h1><p>mina 框架的面向对象是小程序开发者，作用是提供开发过程中的各个页面的组合，数据共享，页面配置，数据绑定，虚拟 DOM等功能的一个框架。</p>
+<a id="more"></a>
+<ul>
+<li>在<a href="https://sentry.io" target="_blank" rel="noopener">官网</a>注册一个账号</li>
+<li>登录进入后台，新建一个项目</li>
+<li>选择一种语言或者框架，这里选择 <code>Flask</code> 作为示例</li>
+<li>给项目起个名字，创建项目</li>
+<li>进入 Flask 项目目录</li>
+<li><p>下载 raven 包</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install raven --upgrade</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载依赖</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install raven[flask]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在项目代码里集成 SDK</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> raven.contrib.flask <span class="keyword">import</span> Sentry</span><br><span class="line">sentry = Sentry(app, dsn=<span class="string">'&lt;dsn&gt;'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入后台页面可以查看异常信息</p>
+</li>
+</ul>
 
       
     </div>
@@ -405,7 +415,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/WeChat/" rel="tag"># WeChat</a>
+            <a href="/tags/sentry/" rel="tag"># sentry</a>
           
         </div>
       
@@ -418,8 +428,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/29/systemctl/" rel="next" title="Linux 命令 systemctl">
-                <i class="fa fa-chevron-left"></i> Linux 命令 systemctl
+              <a href="/2018/05/03/ubuntu-laradock/" rel="next" title="Ubuntu 基于 Laradock 搭建 PHP 开发环境">
+                <i class="fa fa-chevron-left"></i> Ubuntu 基于 Laradock 搭建 PHP 开发环境
               </a>
             
           </div>
@@ -427,10 +437,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/30/version/" rel="prev" title="版本类型说明">
-                版本类型说明 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -482,17 +488,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -556,22 +553,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mina-框架"><span class="nav-number">1.</span> <span class="nav-text">mina 框架</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

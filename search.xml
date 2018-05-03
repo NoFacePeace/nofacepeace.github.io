@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Sentry 初体验]]></title>
+    <url>%2F2018%2F05%2F03%2Fsentry%2F</url>
+    <content type="text"><![CDATA[Sentry provides open source error tracking that shows you every crash in your stack as it happens,with the details needed to prioritize,identify,reproduce,and fix each issue. 在官网注册一个账号 登录进入后台，新建一个项目 选择一种语言或者框架，这里选择 Flask 作为示例 给项目起个名字，创建项目 进入 Flask 项目目录 下载 raven 包 1pip install raven --upgrade 下载依赖 1pip install raven[flask] 在项目代码里集成 SDK 12from raven.contrib.flask import Sentrysentry = Sentry(app, dsn='&lt;dsn&gt;') 进入后台页面可以查看异常信息]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>sentry</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Ubuntu 基于 Laradock 搭建 PHP 开发环境]]></title>
     <url>%2F2018%2F05%2F03%2Fubuntu-laradock%2F</url>
     <content type="text"><![CDATA[PHP 开发环境的最佳实践 前提环境 Docker Docker Compose 下载 Laradock 复制 Laradock 项目 1git clone https://github.com/Laradock/laradock.git 进入 laradock 目录，复制配置文件 1cp env-example .env 运行所需的容器 1docker-compose up -d nginx mysql laradock 同级目录下新建 public 目录 123mkdir publiccd publicecho "Hello World!" &gt; index.html 打开浏览器，访问 http://localhost 1Hello World! 新建测试项目 在 laradock 同级目录下新建项目 123mkdir testcd testecho "test" &gt; index.html 进入 laradock/nginx/sites 并 创建 Nginx 配置文件 1cp app.conf.example test.conf 编辑配置文件 12345678910111213141516171819202122232425262728293031323334353637server &#123; listen 80; listen [::]:80; server_name app.test; root /var/www/test; index index.php index.html index.htm; location / &#123; try_files $uri $uri/ /index.php$is_args$args; &#125; location ~ \.php$ &#123; try_files $uri /index.php =404; fastcgi_pass php-upstream; fastcgi_index index.php; fastcgi_buffers 16 16k; fastcgi_buffer_size 32k; fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; #fixes timeouts fastcgi_read_timeout 600; include fastcgi_params; &#125; location ~ /\.ht &#123; deny all; &#125; location /.well-known/acme-challenge/ &#123; root /var/www/letsencrypt/; log_not_found off; &#125; error_log /var/log/nginx/app_error.log; access_log /var/log/nginx/app_access.log;&#125; 重启 nginx 容器 1docker-compose restart nginx 修改 hosts 文件 1127.0.0.1 app.test 重启网络 1sudo /etc/init.d/networking restart 打开浏览器访问 app.test 1Hello World! 传送门 Laradock 官网]]></content>
