@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Ubuntu 基于 Laradock 搭建 PHP 开发环境]]></title>
+    <url>%2F2018%2F05%2F03%2Fubuntu-laradock%2F</url>
+    <content type="text"><![CDATA[PHP 开发环境的最佳实践 前提环境 Docker Docker Compose 下载 Laradock 复制 Laradock 项目 1git clone https://github.com/Laradock/laradock.git 进入 laradock 目录，复制配置文件 1cp env-example .env 运行所需的容器 1docker-compose up -d nginx mysql laradock 同级目录下新建 public 目录 123mkdir publiccd publicecho "Hello World!" &gt; index.html 打开浏览器，访问 http://localhost 1Hello World! 新建测试项目 在 laradock 同级目录下新建项目 123mkdir testcd testecho "test" &gt; index.html 进入 laradock/nginx/sites 并 创建 Nginx 配置文件 1cp app.conf.example test.conf 编辑配置文件 12345678910111213141516171819202122232425262728293031323334353637server &#123; listen 80; listen [::]:80; server_name app.test; root /var/www/test; index index.php index.html index.htm; location / &#123; try_files $uri $uri/ /index.php$is_args$args; &#125; location ~ \.php$ &#123; try_files $uri /index.php =404; fastcgi_pass php-upstream; fastcgi_index index.php; fastcgi_buffers 16 16k; fastcgi_buffer_size 32k; fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; #fixes timeouts fastcgi_read_timeout 600; include fastcgi_params; &#125; location ~ /\.ht &#123; deny all; &#125; location /.well-known/acme-challenge/ &#123; root /var/www/letsencrypt/; log_not_found off; &#125; error_log /var/log/nginx/app_error.log; access_log /var/log/nginx/app_access.log;&#125; 重启 nginx 容器 1docker-compose restart nginx 修改 hosts 文件 1127.0.0.1 app.test 重启网络 1sudo /etc/init.d/networking restart 打开浏览器访问 app.test 1Hello World! 传送门 Laradock 官网]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu</tag>
+        <tag>PHP</tag>
+        <tag>Docker</tag>
+        <tag>Laradock</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ubuntu 16.04 安装 Docker 及其组件]]></title>
+    <url>%2F2018%2F05%2F01%2Fubuntu-docker%2F</url>
+    <content type="text"><![CDATA[Docker provides a way to run applications securely isolated in a container,packaged with all its dependencies and libraries. 安装 Docker 社区版1234567891011121314# 添加使用 HTTPS 传输的软件包以及 CA 证书sudo apt-get install apt-transport-https ca-certificates curl software-properties-common# 添加软件源的 GPG 密钥curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -# 向 source.list 中添加 Docker 软件源sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"# 安装 Docker 社区版sudo apt-get updatesudo apt-get install docker-ce# 启动 Docker 并设置开机启动sudo systemctl enable dockersudo systemctl start docker# 测试 Dokcer 是否安装正确sudo docker run hello-world 配置国内镜像加速 新建 daemon.json 1234# 用 root 用户进入 /etc/docker/sucd /etc/dockertouch daemon.json 配置 json 文件 12345&#123; "registry-mirrors": [ "https://registry.docker-cn.com" ]&#125; 重新启动服务 1234567sudo systemctl daemon-reloadsudo systemctl restart docker# 检测加速器是否生效docker info# output:Registry Mirrors:https://registry.docker-cn.com/ 安装 Compose123456# 下载二进制文件sudo curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose# 赋予可执行权限sudo chmod +x /usr/local/bin/docker-compose# 检测是否下载docker-compose --version 传送门 Docker 文档 Docker 教程 Docker Compose 文档]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu</tag>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[文档编写规范]]></title>
     <url>%2F2018%2F05%2F01%2Fwrite-document%2F</url>
     <content type="text"><![CDATA[有研究显示，打字的时候不喜欢在中文和英文之间加空格的人，感情路都走得很辛苦，有七成的比例会在 34 岁的时候跟自己不爱的人结婚，而其余三成的人最后只能把遗产留给自己的猫。毕竟爱情跟书写都需要适时地留白。 传送门 中文文案排版指北 Markdown 语法说明]]></content>
@@ -105,8 +131,8 @@
       </categories>
       <tags>
         <tag>PHP</tag>
-        <tag>Win10</tag>
         <tag>Docker</tag>
+        <tag>Win10</tag>
       </tags>
   </entry>
   <entry>
@@ -311,8 +337,8 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>MySQL</tag>
         <tag>Windows</tag>
+        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>
