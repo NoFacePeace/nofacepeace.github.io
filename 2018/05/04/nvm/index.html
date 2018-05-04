@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="NoFacePeace">
 <meta property="og:description" content="Node Version Manager">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-04T11:12:56.929Z">
+<meta property="og:updated_time" content="2018-05-04T11:28:59.918Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NVM 使用">
 <meta name="twitter:description" content="Node Version Manager">
@@ -381,10 +381,21 @@
 </blockquote>
 <a id="more"></a>
 <ul>
-<li>通过 cURL 下载  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash</span><br></pre></td></tr></table></figure>
+<li><p>通过 cURL 下载</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash</span><br></pre></td></tr></table></figure>
 </li>
+<li><p>下载最新版本的 Node</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm install node</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用最新下载的 Node 版本</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm use node</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把旧版本的包迁移到新版本</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm install node --reinstall-packages-from=node</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看所有下载的版本</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm ls</span><br></pre></td></tr></table></figure></li>
 </ul>
-<p>-` </p>
 
       
     </div>

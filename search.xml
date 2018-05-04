@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[NVM 使用]]></title>
     <url>%2F2018%2F05%2F04%2Fnvm%2F</url>
-    <content type="text"><![CDATA[Node Version Manager 通过 cURL 下载 1curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash -`]]></content>
+    <content type="text"><![CDATA[Node Version Manager 通过 cURL 下载 1curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash 下载最新版本的 Node 1nvm install node 使用最新下载的 Node 版本 1nvm use node 把旧版本的包迁移到新版本 1nvm install node --reinstall-packages-from=node 查看所有下载的版本 1nvm ls]]></content>
       <categories>
         <category>分类</category>
       </categories>
