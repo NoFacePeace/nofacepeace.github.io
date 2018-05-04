@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[NVM 使用]]></title>
+    <url>%2F2018%2F05%2F04%2Fnvm%2F</url>
+    <content type="text"><![CDATA[Node Version Manager 通过 cURL 下载 1curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash -`]]></content>
+      <categories>
+        <category>分类</category>
+      </categories>
+      <tags>
+        <tag>NVM</tag>
+        <tag>Node</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[大数据相关]]></title>
+    <url>%2F2018%2F05%2F04%2Fbig-data-system%2F</url>
+    <content type="text"><![CDATA[Kafka Hadoop Storm Spark]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[Fetch API]]></title>
+    <url>%2F2018%2F05%2F04%2Ffetch%2F</url>
+    <content type="text"><![CDATA[传送门 MDN Fetch]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[无限下拉对比分页]]></title>
+    <url>%2F2018%2F05%2F03%2Finfinite-scrolling-vs-pagination%2F</url>
+    <content type="text"><![CDATA[传送门 原文 译文]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[理解 OAuth]]></title>
+    <url>%2F2018%2F05%2F03%2Foauth%2F</url>
+    <content type="text"><![CDATA[传送门 理解 OAuth 2.0]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>OAuth</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Sentry 初体验]]></title>
     <url>%2F2018%2F05%2F03%2Fsentry%2F</url>
     <content type="text"><![CDATA[Sentry provides open source error tracking that shows you every crash in your stack as it happens,with the details needed to prioritize,identify,reproduce,and fix each issue. 在官网注册一个账号 登录进入后台，新建一个项目 选择一种语言或者框架，这里选择 Flask 作为示例 给项目起个名字，创建项目 进入 Flask 项目目录 下载 raven 包 1pip install raven --upgrade 下载依赖 1pip install raven[flask] 在项目代码里集成 SDK 12from raven.contrib.flask import Sentrysentry = Sentry(app, dsn='&lt;dsn&gt;') 进入后台页面可以查看异常信息]]></content>
@@ -348,8 +398,8 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>Windows</tag>
         <tag>MySQL</tag>
+        <tag>Windows</tag>
       </tags>
   </entry>
   <entry>
