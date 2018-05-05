@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Node 模块管理器 NPM]]></title>
+    <url>%2F2018%2F05%2F04%2Fnpm%2F</url>
+    <content type="text"><![CDATA[模块仓库切换到阿里的源 1npm config set registry https://registry.npm.taobao.org/ 检测是否切换成功 1npm config get registry]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Node</tag>
+        <tag>NPM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[NVM 使用]]></title>
     <url>%2F2018%2F05%2F04%2Fnvm%2F</url>
     <content type="text"><![CDATA[Node Version Manager 通过 cURL 下载 1curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash 下载最新版本的 Node 1nvm install node 使用最新下载的 Node 版本 1nvm use node 把旧版本的包迁移到新版本 1nvm install node --reinstall-packages-from=node 查看所有下载的版本 1nvm ls]]></content>
@@ -8,8 +20,8 @@
         <category>分类</category>
       </categories>
       <tags>
-        <tag>NVM</tag>
         <tag>Node</tag>
+        <tag>NVM</tag>
       </tags>
   </entry>
   <entry>
@@ -451,9 +463,9 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[VSCode]]></title>
+    <title><![CDATA[VSCode 使用]]></title>
     <url>%2F2018%2F02%2F15%2FVSCode%2F</url>
-    <content type="text"><![CDATA[在开发过程中，VSCode 常用的快捷方式 新建窗口：Ctrl + Shift + N 打开文件夹: Ctrl + K Ctrl + O 关闭文件夹: Ctrl + K F 向下插入一行： Ctrl + Enter 打开文件： Ctrl + O 文件另存为：Ctrl + Shift + S 打开/关闭终端： Ctrl + ` 替换：Ctrl + H 全部替换：Ctrl + Alt + Enter 选中：Ctrl + D 在当前目录下新建文件：Ctrl + Alt + N 隐藏右侧的预览面板 1&quot;editor.minimap.enabled&quot;: false, 恢复：Ctrl + Y 删除行：Ctrl + Shift + K]]></content>
+    <content type="text"><![CDATA[在开发过程中，实践 VSCode 编辑器 快捷键 新建窗口：Ctrl + Shift + N 打开文件夹: Ctrl + K Ctrl + O 关闭文件夹: Ctrl + K F 向下插入一行： Ctrl + Enter 打开文件： Ctrl + O 文件另存为：Ctrl + Shift + S 打开/关闭终端： Ctrl + ` 替换：Ctrl + H 全部替换：Ctrl + Alt + Enter 选中：Ctrl + D 在当前目录下新建文件：Ctrl + Alt + N 隐藏右侧的预览面板 1&quot;editor.minimap.enabled&quot;: false, 恢复：Ctrl + Y 删除行：Ctrl + Shift + K 问题问题一 Visual Studio Code 无法监视这个大型工作区的文件变化。请访问说明链接解决此问题。 说明链接解决 查看监控文件的限制 1cat /proc/sys/fs/inotify/max_user_watches 备份配置文件 1sudo cp /etc/sysctl.conf /etc/sysctl.conf.bak 打开配置文件 /etc/sysctl.conf，添加配置 1fs.inotify.max_user_watches=524288 重新加载配置 1sudo sysctl -p]]></content>
       <categories>
         <category>教程</category>
       </categories>

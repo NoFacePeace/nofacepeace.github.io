@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="在开发过程中，VSCode 常用的快捷方式">
+<meta name="description" content="在开发过程中，实践 VSCode 编辑器">
 <meta name="keywords" content="VSCode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VSCode">
+<meta property="og:title" content="VSCode 使用">
 <meta property="og:url" content="http://blog.orzcn.cn/2018/02/15/VSCode/index.html">
 <meta property="og:site_name" content="NoFacePeace">
-<meta property="og:description" content="在开发过程中，VSCode 常用的快捷方式">
+<meta property="og:description" content="在开发过程中，实践 VSCode 编辑器">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-30T04:31:02.657Z">
+<meta property="og:updated_time" content="2018-05-05T06:44:50.869Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="VSCode">
-<meta name="twitter:description" content="在开发过程中，VSCode 常用的快捷方式">
+<meta name="twitter:title" content="VSCode 使用">
+<meta name="twitter:description" content="在开发过程中，实践 VSCode 编辑器">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>VSCode | NoFacePeace</title>
+  <title>VSCode 使用 | NoFacePeace</title>
   
 
 
@@ -304,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">VSCode</h1>
+          <h1 class="post-title" itemprop="name headline">VSCode 使用</h1>
         
 
         <div class="post-meta">
@@ -376,9 +376,11 @@
       
 
       
-        <p>在开发过程中，VSCode 常用的快捷方式</p>
+        <blockquote>
+<p>在开发过程中，实践 VSCode 编辑器</p>
+</blockquote>
 <a id="more"></a>
-<ul>
+<h1 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h1><ul>
 <li><p>新建窗口：Ctrl + Shift + N</p>
 </li>
 <li><p>打开文件夹: Ctrl + K Ctrl + O</p>
@@ -408,6 +410,22 @@
 </li>
 <li><p>删除行：Ctrl + Shift + K</p>
 </li>
+</ul>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h2><blockquote>
+<p>Visual Studio Code 无法监视这个大型工作区的文件变化。请访问说明链接解决此问题。</p>
+</blockquote>
+<h3 id="说明链接"><a href="#说明链接" class="headerlink" title="说明链接"></a><a href="https://code.visualstudio.com/docs/setup/linux#_visual-studio-code-is-unable-to-watch-for-file-changes-in-this-large-workspace-error-enospc" target="_blank" rel="noopener">说明链接</a></h3><h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><ul>
+<li><p>查看监控文件的限制</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/sys/fs/inotify/max_user_watches</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>备份配置文件</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /etc/sysctl.conf /etc/sysctl.conf.bak</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开配置文件 <code>/etc/sysctl.conf</code>，添加配置</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fs.inotify.max_user_watches=524288</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重新加载配置</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sysctl -p</span><br></pre></td></tr></table></figure></li>
 </ul>
 
       
@@ -503,8 +521,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -523,7 +550,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -545,7 +572,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -568,6 +595,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#快捷键"><span class="nav-number">1.</span> <span class="nav-text">快捷键</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">2.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题一"><span class="nav-number">2.1.</span> <span class="nav-text">问题一</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#说明链接"><span class="nav-number">2.1.1.</span> <span class="nav-text">说明链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决"><span class="nav-number">2.1.2.</span> <span class="nav-text">解决</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
