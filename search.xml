@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[利用官网 ngrok 服务实现内网穿透]]></title>
+    <url>%2F2018%2F05%2F05%2Fngrok%2F</url>
+    <content type="text"><![CDATA[Get started with ngrok in just a few seconds. 下载 ngrok 解压文件 运行文件 1./ngrok http 80 访问 http://&lt;messy code&gt;.ngrok.io 访问 http://127.0.0.1:4040，查看本地请求的 Web 接口]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>ngrok</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Node 模块管理器 NPM]]></title>
     <url>%2F2018%2F05%2F04%2Fnpm%2F</url>
     <content type="text"><![CDATA[模块仓库切换到阿里的源 1npm config set registry https://registry.npm.taobao.org/ 检测是否切换成功 1npm config get registry]]></content>
