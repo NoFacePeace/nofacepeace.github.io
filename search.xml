@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[全局安装 Composer]]></title>
+    <url>%2F2018%2F05%2F06%2Fcomposer-install%2F</url>
+    <content type="text"><![CDATA[如何全局安装 Composer，以及常见问题 安装12curl -sS https://getcomposer.org/installer | phpsudo mv composer.phar /usr/local/bin/composer 问题 报错 12All settings correct for using ComposerUnable to write keys.dev.pub to: /home/ubuntu/.composer 原因 先前下载了 Composer 然后没有完成移除，所以需要重命名旧的文件夹 解决 1mv ~/.composer ~/.composer.old 传送门 原文]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Composer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Laravel 教程 - Web 开发实战入门实践]]></title>
+    <url>%2F2018%2F05%2F06%2Flaravel-question%2F</url>
+    <content type="text"><![CDATA[Laravel 项目部署到服务器上遇到的问题集 访问 403 原因 Nginx 的站点配置文件没有添加 index.php 项 解决 123server &#123; index index.html index.php index.htm index.nginx-debian.html;&#125; 访问 500 原因 没有下载第三方包 解决 1comoposer install 安装第三方包是报错 原因 缺少 PHP mbstring 扩展 解决 12345678910111213141516 sudo apt-get install php7.0-mbstring ``# 访问首页报错 `Whoops, looks like something went wrong.`- 异常信息 `No supported encrypter found. The cipher and / or key length are invalid.`- 原因 .gitingore 包含 .env 文件，服务器上没有环境变量配置文件，缺少 APP_KEY- 解决 ```bash cp .env.example .env sudo php artisan key:generate]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Laravel</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[利用官网 ngrok 服务实现内网穿透]]></title>
     <url>%2F2018%2F05%2F05%2Fngrok%2F</url>
     <content type="text"><![CDATA[Get started with ngrok in just a few seconds. 下载 ngrok 解压文件 运行文件 1./ngrok http 80 访问 http://&lt;messy code&gt;.ngrok.io 访问 http://127.0.0.1:4040，查看本地请求的 Web 接口]]></content>
@@ -170,8 +192,8 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>PHP</tag>
         <tag>Composer</tag>
+        <tag>PHP</tag>
       </tags>
   </entry>
   <entry>
@@ -294,9 +316,9 @@
         <category>教程</category>
       </categories>
       <tags>
+        <tag>Vscode</tag>
         <tag>Python</tag>
         <tag>Virtualenv</tag>
-        <tag>Vscode</tag>
       </tags>
   </entry>
   <entry>
@@ -421,8 +443,8 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>MySQL</tag>
         <tag>Windows</tag>
+        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>
