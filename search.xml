@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[VIM 学习]]></title>
+    <url>%2F2018%2F05%2F09%2Flearn-vim%2F</url>
+    <content type="text"><![CDATA[Vim the Six Billion Dollar editor 快捷键 i Insert 模式，按 ESC 回到 Normal 模式 :wq 存盘 + 退出 dd 删除当前行，并把删除的行存到剪贴板里 p 粘贴剪贴板 hjkl 移动光标 :help 显示相关命令的帮助 a 在光标后插入 o 在当前行后插入一个新行 O 在当前行前插入一个新行 cw 替换从光标所在位置后到一个单词结尾的字符 0 数字零，到行头 ^ 到本行第一个不是 blank 字符的位置（所谓 blank 字符就是空格，tab，换行，回车等） $ 到本行结尾 yy 拷贝当前行相当于 ddp u undo Ctrl + r redo :N 到第 N 行 gg 到第一行 G 到最后一行 传送门 教程]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>VIM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[www-data 执行 git 操作]]></title>
+    <url>%2F2018%2F05%2F07%2Fnginx-exec-git%2F</url>
+    <content type="text"><![CDATA[Git pull from a php script,not so simple. 报错 error: cannot open .git/FETCH_HEAD: Permission denied12sudo chmod 777 -R repository/sudo chmod 777 -R .git 报错 Host key verification failed1sudo -u www-data ssh-keygen -t rsa 传送门 扩展]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>%2F2018%2F05%2F06%2Favoid-merge-commits-in-git%2F</url>
+    <content type="text"><![CDATA[When running git pull we need to rebase,and so to the first way to avoid merge commits… 拉取代码时添加参数 --rebase1git pull --rebase 局部修改配置文件 ./.git/config12[branch &quot;master&quot;] rebase = true or 1git config branch.master.rebase true 全局修改配置文件 ～/.gitconfig12[branch] autosetuprebase = always or 1git config --global branch.autosetuprebase always 在 ~/.gitconfig 里起别名12[alias] pl = pull --rebase 下次拉取代码时，运行 git pl 传送门 原文]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[全局安装 Composer]]></title>
     <url>%2F2018%2F05%2F06%2Fcomposer-install%2F</url>
     <content type="text"><![CDATA[如何全局安装 Composer，以及常见问题 安装12curl -sS https://getcomposer.org/installer | phpsudo mv composer.phar /usr/local/bin/composer 问题 报错 12All settings correct for using ComposerUnable to write keys.dev.pub to: /home/ubuntu/.composer 原因 先前下载了 Composer 然后没有完成移除，所以需要重命名旧的文件夹 解决 1mv ~/.composer ~/.composer.old 传送门 原文]]></content>
@@ -192,8 +219,8 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>Composer</tag>
         <tag>PHP</tag>
+        <tag>Composer</tag>
       </tags>
   </entry>
   <entry>
@@ -316,9 +343,9 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>Vscode</tag>
         <tag>Python</tag>
         <tag>Virtualenv</tag>
+        <tag>Vscode</tag>
       </tags>
   </entry>
   <entry>
@@ -443,8 +470,8 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>Windows</tag>
         <tag>MySQL</tag>
+        <tag>Windows</tag>
       </tags>
   </entry>
   <entry>
@@ -573,8 +600,8 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>Github</tag>
         <tag>Git</tag>
+        <tag>Github</tag>
       </tags>
   </entry>
   <entry>
