@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="NoFacePeace">
 <meta property="og:description" content="Laravel 项目部署到服务器上遇到的问题集">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-06T07:50:24.390Z">
+<meta property="og:updated_time" content="2018-05-15T12:23:00.017Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Laravel 教程 - Web 开发实战入门实践">
 <meta name="twitter:description" content="Laravel 项目部署到服务器上遇到的问题集">
@@ -401,7 +401,18 @@
 <p>  缺少 PHP mbstring 扩展</p>
 </li>
 <li><p>解决</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">    sudo apt-get install php7.0-mbstring</span><br><span class="line">    ``</span><br><span class="line"></span><br><span class="line"><span class="comment"># 访问首页报错 `Whoops, looks like something went wrong.`</span></span><br><span class="line"></span><br><span class="line">- 异常信息 `No supported encrypter found. The cipher and / or key length are invalid.`</span><br><span class="line"></span><br><span class="line">- 原因</span><br><span class="line"></span><br><span class="line">    .gitingore 包含 .env 文件，服务器上没有环境变量配置文件，缺少 APP_KEY</span><br><span class="line"></span><br><span class="line">- 解决</span><br><span class="line"></span><br><span class="line">    ```bash</span><br><span class="line">    cp .env.example .env</span><br><span class="line">    sudo php artisan key:generate</span><br></pre></td></tr></table></figure></li>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">    sudo apt-get install php7.0-mbstring</span><br><span class="line">    ``</span><br><span class="line"></span><br><span class="line"><span class="comment"># 访问首页报错 `Whoops, looks like something went wrong.`</span></span><br><span class="line"></span><br><span class="line">- 异常信息 `No supported encrypter found. The cipher and / or key length are invalid.`</span><br><span class="line"></span><br><span class="line">- 原因</span><br><span class="line"></span><br><span class="line">    .gitingore 包含 .env 文件，服务器上没有环境变量配置文件，缺少 APP_KEY</span><br><span class="line"></span><br><span class="line">- 解决</span><br><span class="line"></span><br><span class="line">    ```bash</span><br><span class="line">    cp .env.example .env</span><br><span class="line">    sudo php artisan key:generate</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="composer-安装包报错-ErrorException-proc-open-fork-failed-Cannot-allocate-memory"><a href="#composer-安装包报错-ErrorException-proc-open-fork-failed-Cannot-allocate-memory" class="headerlink" title="composer 安装包报错 ErrorException: proc_open(): fork failed - Cannot allocate memory"></a>composer 安装包报错 <code>ErrorException: proc_open(): fork failed - Cannot allocate memory</code></h1><ul>
+<li><p><a href="https://github.com/composer/composer/issues/945" target="_blank" rel="noopener">原文</a></p>
+</li>
+<li><p>原因：内存太小了，开启交换空间</p>
+</li>
+</ul>
+<h1 id="执行-php-artisan-db-seed-报错-In-Container-php-line-752-Class-UsersTableSeeder-does-not-exist"><a href="#执行-php-artisan-db-seed-报错-In-Container-php-line-752-Class-UsersTableSeeder-does-not-exist" class="headerlink" title="执行 php artisan db:seed 报错 In Container.php line 752:Class UsersTableSeeder does not exist"></a>执行 <code>php artisan db:seed</code> 报错 <code>In Container.php line 752:Class UsersTableSeeder does not exist</code></h1><ul>
+<li>原因：类名没有自动加载</li>
+<li><a href="https://stackoverflow.com/questions/48622071/getting-in-container-php-line-752-class-roletableseeder-does-not-exist-error-w" target="_blank" rel="noopener">解决</a></li>
 </ul>
 
       
@@ -526,7 +537,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -581,7 +592,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#访问-403"><span class="nav-number">1.</span> <span class="nav-text">访问 403</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#访问-500"><span class="nav-number">2.</span> <span class="nav-text">访问 500</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装第三方包是报错"><span class="nav-number">3.</span> <span class="nav-text">安装第三方包是报错</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#访问-403"><span class="nav-number">1.</span> <span class="nav-text">访问 403</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#访问-500"><span class="nav-number">2.</span> <span class="nav-text">访问 500</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装第三方包是报错"><span class="nav-number">3.</span> <span class="nav-text">安装第三方包是报错</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#composer-安装包报错-ErrorException-proc-open-fork-failed-Cannot-allocate-memory"><span class="nav-number">4.</span> <span class="nav-text">composer 安装包报错 ErrorException: proc_open(): fork failed - Cannot allocate memory</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#执行-php-artisan-db-seed-报错-In-Container-php-line-752-Class-UsersTableSeeder-does-not-exist"><span class="nav-number">5.</span> <span class="nav-text">执行 php artisan db:seed 报错 In Container.php line 752:Class UsersTableSeeder does not exist</span></a></li></ol></div>
             
 
           </div>
