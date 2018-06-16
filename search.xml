@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[NPM 包的版本规范]]></title>
+    <url>%2F2018%2F06%2F16%2Fversion-of-npm-package%2F</url>
+    <content type="text"><![CDATA[This is how Semantic Versioning works according to the official website. Given a version number MAJOR.MINOR.PATCH,increment the: MAJOR version when you make incompatible API changes 当你修改 API 做一些不兼容变化的时候 MINOR version when you add functionality in a backwards-compatible manner 当你以向后兼容的方式添加功能代码的时候 PATCH version when you make backwards-compatible bug fixes 当你以向后兼容的方式修改 bug 的时候]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Node</tag>
+        <tag>NPM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[如何成为一个更好的交谈者]]></title>
     <url>%2F2018%2F06%2F06%2Fhow-to-talk%2F</url>
     <content type="text"><![CDATA[如何成为一个更好的交谈者？ Don’t multitask. Don’t pontificate. Use open-ended questions. Go with the flow. If you don’t know,say that you don’t know. Don’t equate your experience with theirs. Try not to repeat yourself. Stay out of the weeds. Listen. Be brief.]]></content>
@@ -88,8 +100,8 @@
         <category>分类</category>
       </categories>
       <tags>
-        <tag>Node</tag>
         <tag>NVM</tag>
+        <tag>Node</tag>
       </tags>
   </entry>
   <entry>
@@ -351,9 +363,9 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>Vscode</tag>
         <tag>Python</tag>
         <tag>Virtualenv</tag>
+        <tag>Vscode</tag>
       </tags>
   </entry>
   <entry>
