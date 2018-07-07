@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Node.js 项目初始化]]></title>
+    <url>%2F2018%2F07%2F07%2Fnode-project-init%2F</url>
+    <content type="text"><![CDATA[添加 .gitignore 文件 下载 npm 包 npm install 新建 .env 文件 下载 dotenv 包 npm install dotenv --save]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Node</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[NPM 包的版本规范]]></title>
     <url>%2F2018%2F06%2F16%2Fversion-of-npm-package%2F</url>
     <content type="text"><![CDATA[This is how Semantic Versioning works according to the official website. Given a version number MAJOR.MINOR.PATCH,increment the: MAJOR version when you make incompatible API changes 当你修改 API 做一些不兼容变化的时候 MINOR version when you add functionality in a backwards-compatible manner 当你以向后兼容的方式添加功能代码的时候 PATCH version when you make backwards-compatible bug fixes 当你以向后兼容的方式修改 bug 的时候]]></content>
@@ -100,8 +111,8 @@
         <category>分类</category>
       </categories>
       <tags>
-        <tag>NVM</tag>
         <tag>Node</tag>
+        <tag>NVM</tag>
       </tags>
   </entry>
   <entry>
@@ -363,9 +374,9 @@
         <category>教程</category>
       </categories>
       <tags>
+        <tag>Vscode</tag>
         <tag>Python</tag>
         <tag>Virtualenv</tag>
-        <tag>Vscode</tag>
       </tags>
   </entry>
   <entry>
