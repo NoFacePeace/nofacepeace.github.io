@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title></title>
+    <url>%2F2018%2F07%2F07%2Fusr-bin-env%2F</url>
+    <content type="text"><![CDATA[executable program 可执行程序 脚本语言的第一行，目的就是指出，你想要你的这个文件中的代码用什么可执行程序去运行它 #!/usr/bin/exec 是告诉操作系统执行这个脚本的时候，调用 /usr/bin 下的 exec 解释器 #!/usr/bin/env exec 这种用法是为了防止操作系统用户没有将 exec 装在默认的 /usr/bin 路径里。当系统看到这一行的时候，首先会到 env 设置里查找 exec 的安装路径，再调用对应路径下的解释器程序完成操作 #!/usr/bin/exec 相当于写死了 exec 路径 #!/usr/bin/env exec 会去环境设置寻找 exec 目录，推荐这种写法]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[Node.js 项目初始化]]></title>
     <url>%2F2018%2F07%2F07%2Fnode-project-init%2F</url>
     <content type="text"><![CDATA[添加 .gitignore 文件 下载 npm 包 npm install 新建 .env 文件 下载 dotenv 包 npm install dotenv --save]]></content>
@@ -250,8 +258,8 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>Composer</tag>
         <tag>PHP</tag>
+        <tag>Composer</tag>
       </tags>
   </entry>
   <entry>
@@ -374,9 +382,9 @@
         <category>教程</category>
       </categories>
       <tags>
-        <tag>Vscode</tag>
         <tag>Python</tag>
         <tag>Virtualenv</tag>
+        <tag>Vscode</tag>
       </tags>
   </entry>
   <entry>
