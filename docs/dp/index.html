@@ -20,25 +20,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"blog.orzcn.cn","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="菁酱の博客">
-<meta property="og:url" content="https://blog.orzcn.cn/archives/2022/04/index.html">
+    <meta name="description" content="第三版 算法导论 - 第四部分 高级设计和分析技术 - 第 15 章 动态规划">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法导论之动态规划笔记">
+<meta property="og:url" content="https://blog.orzcn.cn/dp/index.html">
 <meta property="og:site_name" content="菁酱の博客">
-<meta property="og:description" content="个人博客">
+<meta property="og:description" content="第三版 算法导论 - 第四部分 高级设计和分析技术 - 第 15 章 动态规划">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.orzcn.cn/images/dp.png">
+<meta property="article:published_time" content="2022-04-19T13:44:42.000Z">
+<meta property="article:modified_time" content="2022-04-19T14:01:36.683Z">
 <meta property="article:author" content="菁酱">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.orzcn.cn/images/dp.png">
 
 
-<link rel="canonical" href="https://blog.orzcn.cn/archives/2022/04/">
+<link rel="canonical" href="https://blog.orzcn.cn/dp/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"archives/2022/04/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.orzcn.cn/dp/","path":"dp/","title":"算法导论之动态规划笔记"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>归档 | 菁酱の博客</title>
+<title>算法导论之动态规划笔记 | 菁酱の博客</title>
   
 
 
@@ -68,7 +72,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">菁酱の博客</h1>
+      <p class="site-title">菁酱の博客</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">个人博客</p>
@@ -189,69 +193,166 @@
 </noscript>
 
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 2 篇日志。 继续努力。</span>
-      </div>
 
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.orzcn.cn/dp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="菁酱">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="菁酱の博客">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="算法导论之动态规划笔记 | 菁酱の博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          算法导论之动态规划笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
+
+      <time title="创建时间：2022-04-19 21:44:42 / 修改时间：22:01:36" itemprop="dateCreated datePublished" datetime="2022-04-19T21:44:42+08:00">2022-04-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>第三版 算法导论 - 第四部分 高级设计和分析技术 - 第 15 章 动态规划</p>
+</blockquote>
+ <span id="more"></span>
+
+<p><img src="/images/dp.png" alt="image alt text"></p>
+<ol>
+<li><p>概念</p>
+<ul>
+<li>通过组合子问题的解求解原问题</li>
+<li>存在子问题重叠的情况</li>
+<li>保存子问题的解&#x2F;值</li>
+<li>求解最优化问题，存在最优值以及可能多个最优解</li>
+</ul>
+</li>
+<li><p>步骤</p>
+<ol>
+<li>刻画一个最优解的结构特征</li>
+<li>递归地定义最优解的值</li>
+<li>计算最优解的值，通常采用自底向上的方法</li>
+<li>利用计算出的信息构造出一个最优解</li>
+</ol>
+</li>
+<li><p>要素</p>
+<ul>
+<li>最优子结构<ul>
+<li>问题的最优解由相关子问题的最优解组成</li>
+<li>子问题是无关的，子问题可以独立求解</li>
+<li>通用模式<ol>
+<li>做出一个选择</li>
+<li>假定这个选择得到最优解</li>
+<li>这次选择会产生子问题以及如何最好地刻画子问题空间</li>
+<li>用反证法证明每个字问题的解就是它本身的最优解</li>
+</ol>
+</li>
+<li>不同问题最优子结构的区别<ul>
+<li>原问题的最优解涉及多少个子问题</li>
+<li>在确定最优解使用哪些子问题时，需要考察多少种选择</li>
+</ul>
+</li>
+<li>运行时间: 子问题的总数和每个子问题需要考察多少种选择的乘积</li>
+</ul>
+</li>
+<li>子问题重叠<ul>
+<li>不同子问题的总数是输入规模的多项式函数</li>
+<li>递归算法反复求解相同的子问题</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>思想</p>
+<ul>
+<li>时空权衡，利用空间换取时间</li>
+</ul>
+</li>
+<li><p>实现</p>
+<ul>
+<li>带备忘的自顶向下法, 不需要求解所有子问题</li>
+<li>清楚子问题规模的自底向上法, 没有递归开销</li>
+</ul>
+</li>
+<li><p>子问题图 G &#x3D; ( V, E )</p>
+<ul>
+<li>顶点: 每个顶点唯一对应一个子问题</li>
+<li>边: 有向边，表示当前问题最优解依赖子问题的最优解</li>
+<li>动态规划的运行时间跟图的规模呈线性相关, 即跟顶点和边的数量呈线性相关</li>
+</ul>
+</li>
+</ol>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-04-19T21:44:42+08:00"
-              content="2022-04-19">
-          04-19
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/dp/" itemprop="url">
-            <span itemprop="name">算法导论之动态规划笔记</span>
-          </a>
-      </div>
+    <footer class="post-footer">
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/hello-world/" rel="prev" title="Hello World">
+                  <i class="fa fa-chevron-left"></i> Hello World
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-04-19T20:52:03+08:00"
-              content="2022-04-19">
-          04-19
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/hello-world/" itemprop="url">
-            <span itemprop="name">Hello World</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
+</div>
 
 
-    </div>
-  </div>
-  
-  
-  
+
+
+
 
 </div>
   </main>
