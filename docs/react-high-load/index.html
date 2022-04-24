@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.orzcn.cn","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="一般来说，跑满 CPU 大部分都是程序陷入了死循环，优先朝着这个方向进行排查">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次排查 React 应用跑满 CPU 问题">
+<meta property="og:url" content="https://blog.orzcn.cn/react-high-load/index.html">
+<meta property="og:site_name" content="菁酱の博客">
+<meta property="og:description" content="一般来说，跑满 CPU 大部分都是程序陷入了死循环，优先朝着这个方向进行排查">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.orzcn.cn/react-high-load/task-manager.png">
+<meta property="og:image" content="https://blog.orzcn.cn/react-high-load/stack.png">
+<meta property="og:image" content="https://blog.orzcn.cn/react-high-load/source.png">
+<meta property="article:published_time" content="2022-04-23T13:53:22.000Z">
+<meta property="article:modified_time" content="2022-04-24T22:58:12.507Z">
+<meta property="article:author" content="菁酱">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.orzcn.cn/react-high-load/task-manager.png">
+
+
+<link rel="canonical" href="https://blog.orzcn.cn/react-high-load/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.orzcn.cn/react-high-load/","path":"react-high-load/","title":"记一次排查 React 应用跑满 CPU 问题"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>记一次排查 React 应用跑满 CPU 问题 | 菁酱の博客</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">菁酱の博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E6%9F%A5"><span class="nav-number">2.</span> <span class="nav-text">排查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">思考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="菁酱"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">菁酱</p>
+  <div class="site-description" itemprop="description">个人博客</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.orzcn.cn/react-high-load/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="菁酱">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="菁酱の博客">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="记一次排查 React 应用跑满 CPU 问题 | 菁酱の博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          记一次排查 React 应用跑满 CPU 问题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-04-23 21:53:22" itemprop="dateCreated datePublished" datetime="2022-04-23T21:53:22+08:00">2022-04-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-25 06:58:12" itemprop="dateModified" datetime="2022-04-25T06:58:12+08:00">2022-04-25</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>一般来说，跑满 CPU 大部分都是程序陷入了死循环，优先朝着这个方向进行排查</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>近期有同事反馈说，线上 React 应用把 CPU 跑满了，我打开页面同时打开 Chrome 的任务管理器一看，确实 CPU 跑到 100% 以上。</p>
+<p><img src="/react-high-load/task-manager.png"></p>
+<h2 id="排查"><a href="#排查" class="headerlink" title="排查"></a>排查</h2><p>随即打开开发者工具，切换到源代码 Tab，点击暂停脚本执行，发现调用堆栈重复调用 onmessage 和 postMessage 两个函数。</p>
+<p><img src="/react-high-load/stack.png"></p>
+<p>进一步点击单步调试，发现程序在项目代码和 Chrome 扩展来回执行，猜想是不是由于 Chrome 扩展导致的死循环？<br>我重新用无痕模式打开页面，同时关注任务管理器，发现 CPU 是正常的，尝试在控制台执行 <code>window.postMessage(&quot;hh&quot;, &quot;*&quot;)</code>，发现 CPU 跑上来了，看起来像是 Chrome 扩展执行了 window.postMessage 函数触发应用某段死循环代码。<br>React 应用本身没有监听 message 这个事件，猜想是不是引用的依赖库监听 message 事件导致？<br>把代码拉到本地运行起来，通过无痕模式打开页面，依旧在控制台执行 <code>window.postMessage(&quot;hh&quot;, &quot;*&quot;)</code>，发现 CPU 跑上去了，点击暂停脚本执行，程序停止在 index.worker.js 这个文件。</p>
+<p><img src="/react-high-load/source.png"></p>
+<p>通过阅读代码，我们发现，这是一段会造成死循环的代码，onmesage 里面又调用 postMessage，相当于自己监控 message 事件，自己同时也发送 message 消息。<br>这段代码出自 @antv&#x2F;algorithm 这个库，本身是 avtv 内置的常用的图算法 JS 实现，提供给 G6 及 Graphin 用于图分析场景使用。<br>React 应用本身没有直接依赖这个库，通过 package.json 文件发现，应用直接依赖 @antv&#x2F;g6 库，而这个库依赖链如下</p>
+<ol>
+<li>@antv&#x2F;g6-pc</li>
+<li>@antv&#x2F;g6-core</li>
+<li>@antv&#x2F;algorithm</li>
+</ol>
+<p>@antv&#x2F;algorithm 的版本是 <code>0.1.8-beta.5</code>，从 node_modules 里面查看 index.worker.js 的实现，如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">import * as algorithm from &#x27;./algorithm&#x27;;</span><br><span class="line">import &#123; MESSAGE &#125; from &#x27;./constant&#x27;;</span><br><span class="line">var ctx = self;</span><br><span class="line"></span><br><span class="line">ctx.onmessage = function (event) &#123;</span><br><span class="line">  var _a = event.data,</span><br><span class="line">      type = _a.type,</span><br><span class="line">      data = _a.data;</span><br><span class="line"></span><br><span class="line">  if (typeof algorithm[type] === &#x27;function&#x27;) &#123;</span><br><span class="line">    var result = algorithm[type].apply(algorithm, data);</span><br><span class="line">    ctx.postMessage(&#123;</span><br><span class="line">      type: MESSAGE.SUCCESS,</span><br><span class="line">      data: result</span><br><span class="line">    &#125;);</span><br><span class="line">    return;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ctx.postMessage(&#123;</span><br><span class="line">    type: MESSAGE.FAILURE</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;; // https://stackoverflow.com/questions/50210416/webpack-worker-loader-fails-to-compile-typescript-worker</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">export default null;</span><br></pre></td></tr></table></figure>
+
+<p>从源码可知，如果其他地方执行过 window.postMessage 的话，这段代码会陷入死循环。<br>从 github 访问 @antv&#x2F;algorithm 最新版本的实现，发现已经 fix 这个问题，新版本改用 TypeScript，index.worker.ts 代码如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">import * as algorithm from &#x27;./algorithm&#x27;;</span><br><span class="line">import &#123; MESSAGE &#125; from &#x27;./constant&#x27;;</span><br><span class="line"></span><br><span class="line">const ctx: Worker = (typeof self !== &#x27;undefined&#x27;) ? self : &#123;&#125; as any;</span><br><span class="line"></span><br><span class="line">interface Event &#123;</span><br><span class="line">  type: string;</span><br><span class="line">  data: any;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ctx.onmessage = (event: Event) =&gt; &#123;</span><br><span class="line">  const &#123; _algorithmType, data &#125; = event.data;</span><br><span class="line">  // 如果发送内容没有私有类型。说明不是自己发的。不管</span><br><span class="line">  // fix: https://github.com/antvis/algorithm/issues/25</span><br><span class="line">  if(!_algorithmType)&#123;</span><br><span class="line">    return;</span><br><span class="line">  &#125;</span><br><span class="line">  if (typeof algorithm[_algorithmType] === &#x27;function&#x27;) &#123;</span><br><span class="line">    const result = algorithm[_algorithmType](...data);</span><br><span class="line">    ctx.postMessage(&#123; _algorithmType: MESSAGE.SUCCESS, data: result &#125;);</span><br><span class="line">    return;</span><br><span class="line">  &#125;</span><br><span class="line">  ctx.postMessage(&#123; _algorithmType: MESSAGE.FAILURE &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// https://stackoverflow.com/questions/50210416/webpack-worker-loader-fails-to-compile-typescript-worker</span><br><span class="line">export default null as any;</span><br></pre></td></tr></table></figure>
+
+<p>代码注释里面有个 issue 的链接，点击跳转过去，该 issue 确实也是反馈这段代码会陷入死循环，链接如下：<br><a target="_blank" rel="noopener" href="https://github.com/antvis/algorithm/blob/master/packages/graph/src/workers/index.worker.ts">https://github.com/antvis/algorithm/blob/master/packages/graph/src/workers/index.worker.ts</a></p>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><ol>
+<li>奇怪的是，陷入死循环，为什么页面不会卡死，还能响应点击等其他事件<br>这里的问题出在 window.onmessage 里面调用 window.postMessage，而事件监听是异步，其他事件是可以获得执行时间的，不像一般的逻辑死循环，例如 for、while、递归这种，整个执行线程都被占用</li>
+<li>Chrome 扩展为什么会调用 postMessage？<br>通过阅读 Chrome 扩展文档，了解到页面和扩展是可以使用 window.postMessage 通信的<br><a target="_blank" rel="noopener" href="https://developer.chrome.com/docs/extensions/mv3/content_scripts/#host-page-communication">https://developer.chrome.com/docs/extensions/mv3/content_scripts/#host-page-communication</a></li>
+<li>在实现事件监听回调的时候，如果有必要再触发事件本身，提前对事件消息进行校验，避免响应非自身触发的事件</li>
+<li>在保持兼容的情况，尽量使用最新版本的库，新版本一般会伴随着修复旧版本的 Bug</li>
+<li>开发者在使用第三方库的时候，不能因为库流行或者是大厂开源就完全信赖，还是要对依赖库有更深入的了解，防止 Bug 产生</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/hello-world/" rel="prev" title="Hello World">
+                  <i class="fa fa-chevron-left"></i> Hello World
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">菁酱</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
