@@ -22,14 +22,19 @@ categories: 前端
 ![](stack.png)
 
 进一步点击单步调试，发现程序在项目代码和 Chrome 扩展来回执行，猜想是不是由于 Chrome 扩展导致的死循环？
+
 我重新用无痕模式打开页面，同时关注任务管理器，发现 CPU 是正常的，尝试在控制台执行 `window.postMessage("hh", "*")`，发现 CPU 跑上来了，看起来像是 Chrome 扩展执行了 window.postMessage 函数触发应用某段死循环代码。
+
 React 应用本身没有监听 message 这个事件，猜想是不是引用的依赖库监听 message 事件导致？
+
 把代码拉到本地运行起来，通过无痕模式打开页面，依旧在控制台执行 `window.postMessage("hh", "*")`，发现 CPU 跑上去了，点击暂停脚本执行，程序停止在 index.worker.js 这个文件。
 
 ![](source.png)
 
 通过阅读代码，我们发现，这是一段会造成死循环的代码，onmesage 里面又调用 postMessage，相当于自己监控 message 事件，自己同时也发送 message 消息。
+
 这段代码出自 @antv/algorithm 这个库，本身是 avtv 内置的常用的图算法 JS 实现，提供给 G6 及 Graphin 用于图分析场景使用。
+
 React 应用本身没有直接依赖这个库，通过 package.json 文件发现，应用直接依赖 @antv/g6 库，而这个库依赖链如下
 
 1. @antv/g6-pc
@@ -67,6 +72,7 @@ export default null;
 ```
 
 从源码可知，如果其他地方执行过 window.postMessage 的话，这段代码会陷入死循环。
+
 从 github 访问 @antv/algorithm 最新版本的实现，发现已经 fix 这个问题，新版本改用 TypeScript，index.worker.ts 代码如下
 
 ```
@@ -101,6 +107,7 @@ export default null as any;
 
 代码注释里面有个 issue 的链接，点击跳转过去，该 issue 确实也是反馈这段代码会陷入死循环，链接如下：
 https://github.com/antvis/algorithm/blob/master/packages/graph/src/workers/index.worker.ts
+![](issue.png)
 
 ## 思考
 
