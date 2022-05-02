@@ -2,10 +2,9 @@
 title: 搭建个人博客
 date: 2018-01-29 05:36:40
 tags:
-- Hexo
-- Github
+  - Hexo
 categories:
-- 教程 
+  - 教程
 ---
 
 学习用 Hexo + Github Pages 搭建个人博客,并通过自己的域名访问博客.
@@ -113,28 +112,40 @@ hexo new page about
 
 ```markdown
 # source/tags/index.md
+
 title: 标签
 type: "tags"
+
 # source/categories/index.md
+
 title: 分类
 type: "categories"
+
 # source/about/index.md
+
 title: 关于我
 type: "about"
 ```
 
-# 部署Git
+# 部署 Git
 
-## Github创建仓库
+## Github 创建仓库
 
 ```md
 # 格式必需
+
 Repository name: <accountName>.github.io
+
 # 描述非必需
+
 Description:
+
 # 权限必需
+
 public
-# initialize非必需
+
+# initialize 非必需
+
 initialize this repository with a README
 ```
 
@@ -198,6 +209,7 @@ hexo new <title>
 
 ```md
 # Front-matter 是文件最上方以 --- 分隔的区域,用来指定个别文件的变量
+
 title: 标题
 date: 建立日期
 updated: 更新日期
@@ -209,6 +221,7 @@ categories: 分类
 
 ```md
 # 上方的文字作为文章的摘要
+
 <!-- more -->
 ```
 
@@ -218,23 +231,23 @@ categories: 分类
 
 1. 安装 hexo-generator-searchdb，在站点的根目录下执行以下命令
 
-  ```bash
-  npm install hexo-generator-searchdb --save
-  ```
+```bash
+npm install hexo-generator-searchdb --save
+```
 
 1. 编辑站点配置文件，新增以下内容到任意位置
 
-  ```config
-  search:
-    path: search.xml
-    field: post
-    format: html
-    limit: 10000
-  ```
+```config
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+```
 
 1. 编辑主题配置文件，启用本地搜索功能
 
-  ```config
-  local_search:
-    enable: true
-  ```
+```config
+local_search:
+  enable: true
+```

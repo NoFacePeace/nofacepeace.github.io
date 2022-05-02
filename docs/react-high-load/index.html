@@ -30,9 +30,11 @@
 <meta property="og:image" content="https://blog.orzcn.cn/react-high-load/task-manager.png">
 <meta property="og:image" content="https://blog.orzcn.cn/react-high-load/stack.png">
 <meta property="og:image" content="https://blog.orzcn.cn/react-high-load/source.png">
+<meta property="og:image" content="https://blog.orzcn.cn/react-high-load/issue.png">
 <meta property="article:published_time" content="2022-04-23T13:53:22.000Z">
-<meta property="article:modified_time" content="2022-04-24T23:05:16.942Z">
+<meta property="article:modified_time" content="2022-04-24T23:27:10.550Z">
 <meta property="article:author" content="菁酱">
+<meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://blog.orzcn.cn/react-high-load/task-manager.png">
 
@@ -162,18 +164,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -248,7 +250,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-04-25 07:05:16" itemprop="dateModified" datetime="2022-04-25T07:05:16+08:00">2022-04-25</time>
+      <time title="修改时间：2022-04-25 07:27:10" itemprop="dateModified" datetime="2022-04-25T07:27:10+08:00">2022-04-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -279,9 +281,14 @@
 <p><img src="/react-high-load/task-manager.png"></p>
 <h2 id="排查"><a href="#排查" class="headerlink" title="排查"></a>排查</h2><p>随即打开开发者工具，切换到源代码 Tab，点击暂停脚本执行，发现调用堆栈重复调用 onmessage 和 postMessage 两个函数。</p>
 <p><img src="/react-high-load/stack.png"></p>
-<p>进一步点击单步调试，发现程序在项目代码和 Chrome 扩展来回执行，猜想是不是由于 Chrome 扩展导致的死循环？<br>我重新用无痕模式打开页面，同时关注任务管理器，发现 CPU 是正常的，尝试在控制台执行 <code>window.postMessage(&quot;hh&quot;, &quot;*&quot;)</code>，发现 CPU 跑上来了，看起来像是 Chrome 扩展执行了 window.postMessage 函数触发应用某段死循环代码。<br>React 应用本身没有监听 message 这个事件，猜想是不是引用的依赖库监听 message 事件导致？<br>把代码拉到本地运行起来，通过无痕模式打开页面，依旧在控制台执行 <code>window.postMessage(&quot;hh&quot;, &quot;*&quot;)</code>，发现 CPU 跑上去了，点击暂停脚本执行，程序停止在 index.worker.js 这个文件。</p>
+<p>进一步点击单步调试，发现程序在项目代码和 Chrome 扩展来回执行，猜想是不是由于 Chrome 扩展导致的死循环？</p>
+<p>我重新用无痕模式打开页面，同时关注任务管理器，发现 CPU 是正常的，尝试在控制台执行 <code>window.postMessage(&quot;hh&quot;, &quot;*&quot;)</code>，发现 CPU 跑上来了，看起来像是 Chrome 扩展执行了 window.postMessage 函数触发应用某段死循环代码。</p>
+<p>React 应用本身没有监听 message 这个事件，猜想是不是引用的依赖库监听 message 事件导致？</p>
+<p>把代码拉到本地运行起来，通过无痕模式打开页面，依旧在控制台执行 <code>window.postMessage(&quot;hh&quot;, &quot;*&quot;)</code>，发现 CPU 跑上去了，点击暂停脚本执行，程序停止在 index.worker.js 这个文件。</p>
 <p><img src="/react-high-load/source.png"></p>
-<p>通过阅读代码，我们发现，这是一段会造成死循环的代码，onmesage 里面又调用 postMessage，相当于自己监控 message 事件，自己同时也发送 message 消息。<br>这段代码出自 @antv&#x2F;algorithm 这个库，本身是 avtv 内置的常用的图算法 JS 实现，提供给 G6 及 Graphin 用于图分析场景使用。<br>React 应用本身没有直接依赖这个库，通过 package.json 文件发现，应用直接依赖 @antv&#x2F;g6 库，而这个库依赖链如下</p>
+<p>通过阅读代码，我们发现，这是一段会造成死循环的代码，onmesage 里面又调用 postMessage，相当于自己监控 message 事件，自己同时也发送 message 消息。</p>
+<p>这段代码出自 @antv&#x2F;algorithm 这个库，本身是 avtv 内置的常用的图算法 JS 实现，提供给 G6 及 Graphin 用于图分析场景使用。</p>
+<p>React 应用本身没有直接依赖这个库，通过 package.json 文件发现，应用直接依赖 @antv&#x2F;g6 库，而这个库依赖链如下</p>
 <ol>
 <li>@antv&#x2F;g6-pc</li>
 <li>@antv&#x2F;g6-core</li>
@@ -290,10 +297,11 @@
 <p>@antv&#x2F;algorithm 的版本是 <code>0.1.8-beta.5</code>，从 node_modules 里面查看 index.worker.js 的实现，如下</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">import * as algorithm from &#x27;./algorithm&#x27;;</span><br><span class="line">import &#123; MESSAGE &#125; from &#x27;./constant&#x27;;</span><br><span class="line">var ctx = self;</span><br><span class="line"></span><br><span class="line">ctx.onmessage = function (event) &#123;</span><br><span class="line">  var _a = event.data,</span><br><span class="line">      type = _a.type,</span><br><span class="line">      data = _a.data;</span><br><span class="line"></span><br><span class="line">  if (typeof algorithm[type] === &#x27;function&#x27;) &#123;</span><br><span class="line">    var result = algorithm[type].apply(algorithm, data);</span><br><span class="line">    ctx.postMessage(&#123;</span><br><span class="line">      type: MESSAGE.SUCCESS,</span><br><span class="line">      data: result</span><br><span class="line">    &#125;);</span><br><span class="line">    return;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ctx.postMessage(&#123;</span><br><span class="line">    type: MESSAGE.FAILURE</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;; // https://stackoverflow.com/questions/50210416/webpack-worker-loader-fails-to-compile-typescript-worker</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">export default null;</span><br></pre></td></tr></table></figure>
 
-<p>从源码可知，如果其他地方执行过 window.postMessage 的话，这段代码会陷入死循环。<br>从 github 访问 @antv&#x2F;algorithm 最新版本的实现，发现已经 fix 这个问题，新版本改用 TypeScript，index.worker.ts 代码如下</p>
+<p>从源码可知，如果其他地方执行过 window.postMessage 的话，这段代码会陷入死循环。</p>
+<p>从 github 访问 @antv&#x2F;algorithm 最新版本的实现，发现已经 fix 这个问题，新版本改用 TypeScript，index.worker.ts 代码如下</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">import * as algorithm from &#x27;./algorithm&#x27;;</span><br><span class="line">import &#123; MESSAGE &#125; from &#x27;./constant&#x27;;</span><br><span class="line"></span><br><span class="line">const ctx: Worker = (typeof self !== &#x27;undefined&#x27;) ? self : &#123;&#125; as any;</span><br><span class="line"></span><br><span class="line">interface Event &#123;</span><br><span class="line">  type: string;</span><br><span class="line">  data: any;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ctx.onmessage = (event: Event) =&gt; &#123;</span><br><span class="line">  const &#123; _algorithmType, data &#125; = event.data;</span><br><span class="line">  // 如果发送内容没有私有类型。说明不是自己发的。不管</span><br><span class="line">  // fix: https://github.com/antvis/algorithm/issues/25</span><br><span class="line">  if(!_algorithmType)&#123;</span><br><span class="line">    return;</span><br><span class="line">  &#125;</span><br><span class="line">  if (typeof algorithm[_algorithmType] === &#x27;function&#x27;) &#123;</span><br><span class="line">    const result = algorithm[_algorithmType](...data);</span><br><span class="line">    ctx.postMessage(&#123; _algorithmType: MESSAGE.SUCCESS, data: result &#125;);</span><br><span class="line">    return;</span><br><span class="line">  &#125;</span><br><span class="line">  ctx.postMessage(&#123; _algorithmType: MESSAGE.FAILURE &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// https://stackoverflow.com/questions/50210416/webpack-worker-loader-fails-to-compile-typescript-worker</span><br><span class="line">export default null as any;</span><br></pre></td></tr></table></figure>
 
-<p>代码注释里面有个 issue 的链接，点击跳转过去，该 issue 确实也是反馈这段代码会陷入死循环，链接如下：<br><a target="_blank" rel="noopener" href="https://github.com/antvis/algorithm/blob/master/packages/graph/src/workers/index.worker.ts">https://github.com/antvis/algorithm/blob/master/packages/graph/src/workers/index.worker.ts</a></p>
+<p>代码注释里面有个 issue 的链接，点击跳转过去，该 issue 确实也是反馈这段代码会陷入死循环，链接如下：<br><a target="_blank" rel="noopener" href="https://github.com/antvis/algorithm/blob/master/packages/graph/src/workers/index.worker.ts">https://github.com/antvis/algorithm/blob/master/packages/graph/src/workers/index.worker.ts</a><br><img src="/react-high-load/issue.png"></p>
 <h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><ol>
 <li>奇怪的是，陷入死循环，为什么页面不会卡死，还能响应点击等其他事件<br>这里的问题出在 window.onmessage 里面调用 window.postMessage，而事件监听是异步，其他事件是可以获得执行时间的，不像一般的逻辑死循环，例如 for、while、递归这种，整个执行线程都被占用</li>
 <li>Chrome 扩展为什么会调用 postMessage？<br>通过阅读 Chrome 扩展文档，了解到页面和扩展是可以使用 window.postMessage 通信的<br><a target="_blank" rel="noopener" href="https://developer.chrome.com/docs/extensions/mv3/content_scripts/#host-page-communication">https://developer.chrome.com/docs/extensions/mv3/content_scripts/#host-page-communication</a></li>
@@ -309,6 +317,9 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/React/" rel="tag"># React</a>
+          </div>
 
         
 
@@ -319,6 +330,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/go-standard/" rel="next" title="Golang 代码规范">
+                  Golang 代码规范 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>

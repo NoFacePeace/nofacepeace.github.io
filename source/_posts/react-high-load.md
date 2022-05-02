@@ -2,6 +2,7 @@
 title: 记一次排查 React 应用跑满 CPU 问题
 date: 2022-04-23 21:53:22
 tags:
+  - React
 categories: 前端
 ---
 
