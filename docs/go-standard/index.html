@@ -20,16 +20,17 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"blog.orzcn.cn","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="工具 golangci-lint: 静态代码检查工具 gofmt: 代码格式化工具 goimports: 引用管理工具  代码风格换行 一行代码不要超过 120 列  import 对引用包分组管理，分为标准包、内部包、第三方包、匿名包 不要使用相对路径引入包  error error 作为函数的值返回，必须处理，且必须是最后一个参数 错误描述不需要标点结尾，且全部小写 采用独立的错误流进行处理">
+    <meta name="description" content="工具 golangci-lint: 静态代码检查工具 gofmt: 代码格式化工具 goimports: 引用管理工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Golang 代码规范">
 <meta property="og:url" content="https://blog.orzcn.cn/go-standard/index.html">
 <meta property="og:site_name" content="菁酱の博客">
-<meta property="og:description" content="工具 golangci-lint: 静态代码检查工具 gofmt: 代码格式化工具 goimports: 引用管理工具  代码风格换行 一行代码不要超过 120 列  import 对引用包分组管理，分为标准包、内部包、第三方包、匿名包 不要使用相对路径引入包  error error 作为函数的值返回，必须处理，且必须是最后一个参数 错误描述不需要标点结尾，且全部小写 采用独立的错误流进行处理">
+<meta property="og:description" content="工具 golangci-lint: 静态代码检查工具 gofmt: 代码格式化工具 goimports: 引用管理工具">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-25T05:12:37.000Z">
-<meta property="article:modified_time" content="2022-04-25T05:32:20.786Z">
+<meta property="article:modified_time" content="2022-05-06T05:13:27.440Z">
 <meta property="article:author" content="菁酱">
+<meta property="article:tag" content="Golangg">
 <meta name="twitter:card" content="summary">
 
 
@@ -143,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7"><span class="nav-number">1.</span> <span class="nav-text">工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC"><span class="nav-number">2.</span> <span class="nav-text">代码风格</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8D%A2%E8%A1%8C"><span class="nav-number">2.0.1.</span> <span class="nav-text">换行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#import"><span class="nav-number">2.0.2.</span> <span class="nav-text">import</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#error"><span class="nav-number">2.0.3.</span> <span class="nav-text">error</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7"><span class="nav-number">1.</span> <span class="nav-text">工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC"><span class="nav-number">2.</span> <span class="nav-text">代码风格</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8D%A2%E8%A1%8C"><span class="nav-number">2.0.1.</span> <span class="nav-text">换行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%AC%E5%8F%B7%E5%92%8C%E7%A9%BA%E6%A0%BC"><span class="nav-number">2.0.2.</span> <span class="nav-text">括号和空格</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#import"><span class="nav-number">2.0.3.</span> <span class="nav-text">import</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#error"><span class="nav-number">2.0.4.</span> <span class="nav-text">error</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#panic"><span class="nav-number">2.0.5.</span> <span class="nav-text">panic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#recover"><span class="nav-number">2.0.6.</span> <span class="nav-text">recover</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#assertion"><span class="nav-number">2.0.7.</span> <span class="nav-text">assertion</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E9%87%8A"><span class="nav-number">3.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83"><span class="nav-number">4.</span> <span class="nav-text">命名规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%84"><span class="nav-number">5.</span> <span class="nav-text">控制结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">6.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E6%95%B0"><span class="nav-number">6.0.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#defer"><span class="nav-number">6.0.2.</span> <span class="nav-text">defer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E7%9A%84%E6%8E%A5%E6%94%B6%E5%99%A8"><span class="nav-number">6.0.3.</span> <span class="nav-text">方法的接收器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%A1%8C%E6%95%B0"><span class="nav-number">6.0.4.</span> <span class="nav-text">代码行数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B5%8C%E5%A5%97"><span class="nav-number">6.0.5.</span> <span class="nav-text">嵌套</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E"><span class="nav-number">6.0.6.</span> <span class="nav-text">变量声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AD%94%E6%B3%95%E6%95%B0%E5%AD%97"><span class="nav-number">6.0.7.</span> <span class="nav-text">魔法数字</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -158,7 +159,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -169,7 +170,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -236,9 +237,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-04-25 13:12:37 / 修改时间：13:32:20" itemprop="dateCreated datePublished" datetime="2022-04-25T13:12:37+08:00">2022-04-25</time>
+      <time title="创建时间：2022-04-25 13:12:37" itemprop="dateCreated datePublished" datetime="2022-04-25T13:12:37+08:00">2022-04-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-05-06 13:13:27" itemprop="dateModified" datetime="2022-05-06T13:13:27+08:00">2022-05-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -265,8 +272,14 @@
 <li>gofmt: 代码格式化工具</li>
 <li>goimports: 引用管理工具</li>
 </ul>
+<span id="more"></span>
+
 <h2 id="代码风格"><a href="#代码风格" class="headerlink" title="代码风格"></a>代码风格</h2><h4 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h4><ul>
 <li>一行代码不要超过 120 列</li>
+</ul>
+<h4 id="括号和空格"><a href="#括号和空格" class="headerlink" title="括号和空格"></a>括号和空格</h4><ul>
+<li>运算符和操作数之间要留空格</li>
+<li>作为输入参数或者数组下标时，运算符和运算数之间不需要空格，紧凑展示</li>
 </ul>
 <h4 id="import"><a href="#import" class="headerlink" title="import"></a>import</h4><ul>
 <li>对引用包分组管理，分为标准包、内部包、第三方包、匿名包</li>
@@ -274,9 +287,77 @@
 </ul>
 <h4 id="error"><a href="#error" class="headerlink" title="error"></a>error</h4><ul>
 <li>error 作为函数的值返回，必须处理，且必须是最后一个参数</li>
+<li>单个参数为 error 采用局部变量</li>
 <li>错误描述不需要标点结尾，且全部小写</li>
 <li>采用独立的错误流进行处理</li>
 <li>错误返回的判断独立处理，不与其他变量组合逻辑判断</li>
+<li>对于不需要格式化的错误，生成方式为：errors.New(“xxxx”)</li>
+<li>格式化错误，error 生成方式为：fmt.Errorf(“module xxx: %w”, err)</li>
+</ul>
+<h4 id="panic"><a href="#panic" class="headerlink" title="panic"></a>panic</h4><ul>
+<li>在业务逻辑处理中禁止使用 panic</li>
+<li>在 main 包中使用 log.Fatal 来记录错误</li>
+<li>panic 捕获只能到 goroutine 最顶层，每个自行启动的 goroutine，必须在入口处捕获 panic，并打印详细堆栈信息或进行其它处理</li>
+</ul>
+<h4 id="recover"><a href="#recover" class="headerlink" title="recover"></a>recover</h4><ul>
+<li>必须在 defer 中使用，一般用来捕获程序运行期间发生异常抛出的 panic 或程序主动抛出的 panic</li>
+</ul>
+<h4 id="assertion"><a href="#assertion" class="headerlink" title="assertion"></a>assertion</h4><ul>
+<li>type assertion 的单个返回值形式针对不正确的类型将产生 panic。因此，请始终使用 “comma ok” 的惯用法</li>
+</ul>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><ul>
+<li>包注释 <code>// Package 包名 包信息描述</code></li>
+<li>方法注释 <code>// 函数名 函数信息描述</code></li>
+<li>结构体注释 <code>// 结构体名 结构体信息描述</code></li>
+<li>变量和常量注释 <code>// 变量名 变量信息描述</code></li>
+<li>类型注释 <code>// 类型名 类型信息描述</code></li>
+</ul>
+<h2 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h2><ul>
+<li>不要使用无意义或意义太宽泛的命名</li>
+<li>包命名: 保持 package 的名字和目录一致, 包名应该为小写单词，不要使用下划线或者混合大小写，使用多级目录来划分层级</li>
+<li>文件命名: 文件名应该采用小写，并且使用下划线分割各个单词</li>
+<li>结构体: 采用驼峰命名方式, 结构体名应该是名词或名词短语, 结构体的声明和初始化格式采用多行</li>
+<li>接口命名: 采用驼峰命名方式, 单个函数的接口名以 er 作为后缀, 两个函数的接口名综合两个函数名</li>
+<li>变量命名: 必须遵循驼峰式, 专有名词保持原样</li>
+<li>常量命名: 必须遵循驼峰式, 专有名词保持原样</li>
+<li>函数命名: 必须遵循驼峰式, 专有名词保持原样</li>
+</ul>
+<h2 id="控制结构"><a href="#控制结构" class="headerlink" title="控制结构"></a>控制结构</h2><ul>
+<li>if 建立局部变量</li>
+<li>if 变量在左，常量在右</li>
+<li>if bool 直接判断，不需要等号</li>
+<li>for 建立局部变量</li>
+<li>range 如果只需要第一项（key），就丢弃第二个</li>
+<li>range 如果只需要第二项，则把第一项置为下划线</li>
+<li>switch 要求必须有 default</li>
+<li>return 尽早 return，一旦有错误发生，马上返回</li>
+<li>goto 业务代码禁止使用 goto</li>
+</ul>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><ul>
+<li>参数数量均不能超过 5 个</li>
+<li>尽量用值传递，非指针传递</li>
+<li>传入参数是 map，slice，chan，interface 不要传递指针</li>
+</ul>
+<h4 id="defer"><a href="#defer" class="headerlink" title="defer"></a>defer</h4><ul>
+<li>当存在资源管理时，应紧跟 defer 函数进行资源的释放</li>
+<li>判断是否有错误发生之后，再 defer 释放资源</li>
+<li>禁止在循环中使用 defer</li>
+</ul>
+<h4 id="方法的接收器"><a href="#方法的接收器" class="headerlink" title="方法的接收器"></a>方法的接收器</h4><ul>
+<li>推荐以类名第一个英文首字母的小写作为接收器的命名</li>
+</ul>
+<h4 id="代码行数"><a href="#代码行数" class="headerlink" title="代码行数"></a>代码行数</h4><ul>
+<li>文件长度不能超过 800 行</li>
+<li>函数长度不能超过 80 行</li>
+</ul>
+<h4 id="嵌套"><a href="#嵌套" class="headerlink" title="嵌套"></a>嵌套</h4><ul>
+<li>嵌套深度不能超过 4 层</li>
+</ul>
+<h4 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h4><ul>
+<li>变量声明尽量放在变量第一次使用前面，就近原则</li>
+</ul>
+<h4 id="魔法数字"><a href="#魔法数字" class="headerlink" title="魔法数字"></a>魔法数字</h4><ul>
+<li>如果魔法数字出现超过 2 次，则禁止使用，用一个常量代替</li>
 </ul>
 
     </div>
@@ -286,6 +367,9 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Golangg/" rel="tag"># Golangg</a>
+          </div>
 
         
 
