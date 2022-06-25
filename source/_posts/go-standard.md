@@ -2,7 +2,7 @@
 title: Golang 代码规范
 date: 2022-04-25 13:12:37
 tags:
-  - Golangg
+  - Golang
 categories: 后端
 ---
 
@@ -16,21 +16,21 @@ categories: 后端
 
 ## 代码风格
 
-#### 换行
+### 换行
 
 - 一行代码不要超过 120 列
 
-#### 括号和空格
+### 括号和空格
 
 - 运算符和操作数之间要留空格
 - 作为输入参数或者数组下标时，运算符和运算数之间不需要空格，紧凑展示
 
-#### import
+### import
 
 - 对引用包分组管理，分为标准包、内部包、第三方包、匿名包
 - 不要使用相对路径引入包
 
-#### error
+### error
 
 - error 作为函数的值返回，必须处理，且必须是最后一个参数
 - 单个参数为 error 采用局部变量
@@ -40,17 +40,17 @@ categories: 后端
 - 对于不需要格式化的错误，生成方式为：errors.New("xxxx")
 - 格式化错误，error 生成方式为：fmt.Errorf("module xxx: %w", err)
 
-#### panic
+### panic
 
 - 在业务逻辑处理中禁止使用 panic
 - 在 main 包中使用 log.Fatal 来记录错误
 - panic 捕获只能到 goroutine 最顶层，每个自行启动的 goroutine，必须在入口处捕获 panic，并打印详细堆栈信息或进行其它处理
 
-#### recover
+### recover
 
 - 必须在 defer 中使用，一般用来捕获程序运行期间发生异常抛出的 panic 或程序主动抛出的 panic
 
-#### assertion
+### assertion
 
 - type assertion 的单个返回值形式针对不正确的类型将产生 panic。因此，请始终使用 “comma ok” 的惯用法
 
@@ -87,35 +87,44 @@ categories: 后端
 
 ## 函数
 
-#### 参数
+### 参数
 
 - 参数数量均不能超过 5 个
 - 尽量用值传递，非指针传递
 - 传入参数是 map，slice，chan，interface 不要传递指针
 
-#### defer
+### defer
 
 - 当存在资源管理时，应紧跟 defer 函数进行资源的释放
 - 判断是否有错误发生之后，再 defer 释放资源
 - 禁止在循环中使用 defer
 
-#### 方法的接收器
+### 方法的接收器
 
 - 推荐以类名第一个英文首字母的小写作为接收器的命名
 
-#### 代码行数
+### 代码行数
 
 - 文件长度不能超过 800 行
 - 函数长度不能超过 80 行
 
-#### 嵌套
+### 嵌套
 
 - 嵌套深度不能超过 4 层
 
-#### 变量声明
+### 变量声明
 
 - 变量声明尽量放在变量第一次使用前面，就近原则
 
-#### 魔法数字
+### 魔法数字
 
 - 如果魔法数字出现超过 2 次，则禁止使用，用一个常量代替
+
+## 参考
+
+- [CodeReviewComments](https://github.com/golang/go/wiki/CodeReviewComments)
+- Effective Go
+- CodeReviewComments
+- CommonMistakes
+- The Go Blog
+- Uber Go Style Guide
