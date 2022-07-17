@@ -47,15 +47,10 @@ category: 后端
 - [Go语言圣经](https://books.studygolang.com/gopl-zh/)
 - [Go 语言设计与实现](https://draveness.me/golang/)
 - [Go入门指南](https://github.com/unknwon/the-way-to-go_ZH_CN)
-- [Go入门指南](https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/preface.md)
+- [Go Web 编程](https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/preface.md)
 
 ## 扩展
 
-- 架构整洁之道
-- 软件设计哲学
-- 代码大全
-- 修改代码的艺术
-- 编写可读代码的艺术
-- 敏捷软件开发——原则、模式与实践
-- 重构——改善既有代码的设计
-- 代码整洁之道
+- [Go 程序员面试笔试宝典](https://golang.design/go-questions/)
+- [Go 语言笔记](https://go.xargin.com/)
+- [Golang 面试题搜集](https://github.com/lifei6671/interview-go)
