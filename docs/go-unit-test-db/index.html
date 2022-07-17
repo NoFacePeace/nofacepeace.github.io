@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.orzcn.cn","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384&#x2F;&#x2F; main.gopackage mainimport (	&quot;fmt&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="go unit test db">
+<meta property="og:url" content="https://blog.orzcn.cn/go-unit-test-db/index.html">
+<meta property="og:site_name" content="菁酱の博客">
+<meta property="og:description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384&#x2F;&#x2F; main.gopackage mainimport (	&quot;fmt&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-14T08:04:31.000Z">
+<meta property="article:modified_time" content="2022-06-14T08:04:36.410Z">
+<meta property="article:author" content="菁酱">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.orzcn.cn/go-unit-test-db/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.orzcn.cn/go-unit-test-db/","path":"go-unit-test-db/","title":"go unit test db"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>go unit test db | 菁酱の博客</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">菁酱の博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="菁酱"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">菁酱</p>
+  <div class="site-description" itemprop="description">个人博客</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.orzcn.cn/go-unit-test-db/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="菁酱">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="菁酱の博客">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="go unit test db | 菁酱の博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          go unit test db
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-06-14 16:04:31 / 修改时间：16:04:36" itemprop="dateCreated datePublished" datetime="2022-06-14T16:04:31+08:00">2022-06-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.go</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;log&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="string">&quot;github.com/pkg/errors&quot;</span></span><br><span class="line">	<span class="string">&quot;gorm.io/driver/mysql&quot;</span></span><br><span class="line">	<span class="string">&quot;gorm.io/gorm&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Settle 结算系统接口</span></span><br><span class="line"><span class="keyword">type</span> Settle <span class="keyword">interface</span> &#123;</span><br><span class="line">	GetSettleItem(id <span class="type">int</span>) (*SettleItem, <span class="type">error</span>)</span><br><span class="line">	GetSettleRule(id <span class="type">int</span>) (*SettleRule, <span class="type">error</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// settle 结算系统接口实现</span></span><br><span class="line"><span class="keyword">type</span> settle <span class="keyword">struct</span> &#123;</span><br><span class="line">	db *gorm.DB</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// SettleItem 结算项</span></span><br><span class="line"><span class="keyword">type</span> SettleItem <span class="keyword">struct</span> &#123;</span><br><span class="line">	ID   <span class="type">int</span>    <span class="string">`gorm:&quot;column:id&quot;`</span></span><br><span class="line">	Name <span class="type">string</span> <span class="string">`gorm:&quot;column:name&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// TableName 结算项表名</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(SettleItem)</span></span> TableName() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;t_settle_item&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// SettleRule 结算规则</span></span><br><span class="line"><span class="keyword">type</span> SettleRule <span class="keyword">struct</span> &#123;</span><br><span class="line">	ItemID <span class="type">int</span>     <span class="string">`gorm:&quot;column:item_id&quot;`</span></span><br><span class="line">	Month  <span class="type">string</span>  <span class="string">`gorm:&quot;column:month&quot;`</span></span><br><span class="line">	Price  <span class="type">float64</span> <span class="string">`gorm:&quot;column:price&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// TableName 结算规则表面</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(SettleRule)</span></span> TableName() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;t_settle_rule&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// NewSettle 创建实例</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewSettle</span><span class="params">(db *gorm.DB)</span></span> Settle &#123;</span><br><span class="line">	<span class="keyword">return</span> &amp;settle&#123;db: db&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// GetSettleItem 根据 ID 获取结算项</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *settle)</span></span> GetSettleItem(id <span class="type">int</span>) (*SettleItem, <span class="type">error</span>) &#123;</span><br><span class="line">	<span class="keyword">var</span> i SettleItem</span><br><span class="line">	<span class="keyword">if</span> err := s.db.First(&amp;i, id).Error; err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, errors.Wrap(err, <span class="string">&quot;get settle item error&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> &amp;i, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// GetSettleRule 根据结算项 ID 获取结算规则</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *settle)</span></span> GetSettleRule(id <span class="type">int</span>) (*SettleRule, <span class="type">error</span>) &#123;</span><br><span class="line">	<span class="keyword">var</span> r SettleRule</span><br><span class="line">	<span class="keyword">if</span> err := s.db.First(&amp;r, <span class="string">&quot;item_id = ?&quot;</span>, id).Error; err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, errors.Wrap(err, <span class="string">&quot;get settle rule error&quot;</span>)</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> &amp;r, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	dsn := <span class="string">&quot;user:pass@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4&amp;parseTime=True&amp;loc=Local&quot;</span></span><br><span class="line">	db, err := gorm.Open(mysql.Open(dsn), &amp;gorm.Config&#123;&#125;)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(err)</span><br><span class="line">	&#125;</span><br><span class="line">	s := NewSettle(db)</span><br><span class="line">	item, err := s.GetSettleItem(<span class="number">1</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(err)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(item)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main_test.go</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;io/ioutil&quot;</span></span><br><span class="line">	<span class="string">&quot;log&quot;</span></span><br><span class="line">	<span class="string">&quot;os&quot;</span></span><br><span class="line">	<span class="string">&quot;testing&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="string">&quot;github.com/pkg/errors&quot;</span></span><br><span class="line">	. <span class="string">&quot;github.com/smartystreets/goconvey/convey&quot;</span></span><br><span class="line">	<span class="string">&quot;gorm.io/driver/sqlite&quot;</span></span><br><span class="line">	<span class="string">&quot;gorm.io/gorm&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> dbFile = <span class="string">&quot;./test.db&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> db *gorm.DB</span><br><span class="line"></span><br><span class="line"><span class="comment">// TestMain 单测初始化</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestMain</span><span class="params">(m *testing.M)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> err := InitSQLite(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(err)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> err := ExecSQLite(<span class="string">&quot;test.sql&quot;</span>); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(err)</span><br><span class="line">	&#125;</span><br><span class="line">	code := m.Run()</span><br><span class="line">	<span class="keyword">if</span> err := DelSQLite(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(err)</span><br><span class="line">	&#125;</span><br><span class="line">	os.Exit(code)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// InitSQLite init sqlite</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">InitSQLite</span><span class="params">()</span></span> <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> err := DelSQLite(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">var</span> err <span class="type">error</span></span><br><span class="line">	db, err = gorm.Open(sqlite.Open(dbFile), &amp;gorm.Config&#123;&#125;)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> errors.Wrap(err, <span class="string">&quot;init sqlite error&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> err := db.AutoMigrate(&amp;SettleItem&#123;&#125;); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> errors.Wrap(err, <span class="string">&quot;init sqlite error&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> err := db.AutoMigrate(&amp;SettleRule&#123;&#125;); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> errors.Wrap(err, <span class="string">&quot;init sqlite error&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ExecSQLite 根据 sql 文件执行 sql 语句</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ExecSQLite</span><span class="params">(sqlFile <span class="type">string</span>)</span></span> <span class="type">error</span> &#123;</span><br><span class="line">	data, err := ioutil.ReadFile(sqlFile)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> errors.Wrap(err, <span class="string">&quot;exec sqlite error&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	s := <span class="type">string</span>(data)</span><br><span class="line">	<span class="keyword">if</span> err := db.Exec(s).Error; err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> errors.Wrap(err, <span class="string">&quot;exec sqlite error&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// DelSQLite 删除 db 文件</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">DelSQLite</span><span class="params">()</span></span> <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> _, err := os.Stat(dbFile); os.IsNotExist(err) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	err := os.Remove(dbFile)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> errors.Wrap(err, <span class="string">&quot;del sqlite error&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestNewSettle</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	Convey(<span class="string">&quot;NewSettle&quot;</span>, t, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		obj := NewSettle(db)</span><br><span class="line">		So(obj, ShouldNotBeNil)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Test_settle_GetSettleItem</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	Convey(<span class="string">&quot;GetSettleItem&quot;</span>, t, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		obj := NewSettle(db)</span><br><span class="line">		i, err := obj.GetSettleItem(<span class="number">1</span>)</span><br><span class="line">		So(err, ShouldBeNil)</span><br><span class="line">		So(i.Name, ShouldEqual, <span class="string">&quot;1&quot;</span>)</span><br><span class="line">	&#125;)</span><br><span class="line">	Convey(<span class="string">&quot;GetSettleItem not found&quot;</span>, t, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		obj := NewSettle(db)</span><br><span class="line">		_, err := obj.GetSettleItem(<span class="number">2</span>)</span><br><span class="line">		So(errors.Is(err, gorm.ErrRecordNotFound), ShouldEqual, <span class="literal">true</span>)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Test_settle_GetSettleRule</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	Convey(<span class="string">&quot;GetSettleRule&quot;</span>, t, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		obj := NewSettle(db)</span><br><span class="line">		i, err := obj.GetSettleRule(<span class="number">1</span>)</span><br><span class="line">		So(err, ShouldBeNil)</span><br><span class="line">		So(i.Price, ShouldEqual, <span class="number">1</span>)</span><br><span class="line">	&#125;)</span><br><span class="line">	Convey(<span class="string">&quot;GetSettleRule not found&quot;</span>, t, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		obj := NewSettle(db)</span><br><span class="line">		_, err := obj.GetSettleRule(<span class="number">2</span>)</span><br><span class="line">		So(errors.Is(err, gorm.ErrRecordNotFound), ShouldEqual, <span class="literal">true</span>)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `t_settle_item` (`id`, `name`) <span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="string">&#x27;1&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `t_settle_rule` (`item_id`, `<span class="keyword">month</span>`, `price`) <span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="string">&#x27;202109&#x27;</span>, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/go-fix-line-too-long/" rel="prev" title="go fix line too long">
+                  <i class="fa fa-chevron-left"></i> go fix line too long
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/go-struct-implement-interface/" rel="next" title="go struct implement interface">
+                  go struct implement interface <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">菁酱</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
